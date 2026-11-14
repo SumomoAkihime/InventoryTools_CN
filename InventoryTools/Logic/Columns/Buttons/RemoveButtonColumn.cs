@@ -45,13 +45,15 @@ public class RemoveButtonColumn : ButtonColumn
                 configuration.RemoveCuratedItem(searchResult.CuratedItem);
             }
         }
-        ImGuiUtil.HoverTooltip("Remove this item");
+        ImGuiUtil.HoverTooltip("移除此物品");
 
         return null;
     }
 
     public override bool HideHeaderLabel => true;
-    public override string Name { get; set; } = "Remove";
+    public override string Name { get; set; } = "移除";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Remove";
     public override float Width { get; set; } = 60;
-    public override string HelpText { get; set; } = "Adds a button for quickly removing items from your list";
+    public override string HelpText { get; set; } = "添加从列表快速移除物品的按钮";
 }

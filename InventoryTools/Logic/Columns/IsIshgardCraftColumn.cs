@@ -15,9 +15,11 @@ namespace InventoryTools.Logic.Columns
         {
             return searchResult.Item.HasUsesByType(ItemInfoType.SkybuilderHandIn);
         }
-        public override string Name { get; set; } = "Is Ishgardian Craft?";
+        public override string Name { get; set; } = "是否为重建制作物品";
+        [Newtonsoft.Json.JsonIgnore]
+        public override string ExportName => "Is Ishgardian Craft?";
         public override float Width { get; set; } = 100;
-        public override string HelpText { get; set; } = "Is this item a Ishgardian Restoration craft item?";
+        public override string HelpText { get; set; } = "物品是否为伊修加德重建制作物品";
         public override bool HasFilter { get; set; } = true;
         public override ColumnFilterType FilterType { get; set; } = ColumnFilterType.Text;
     }

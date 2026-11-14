@@ -19,9 +19,11 @@ namespace InventoryTools.Logic.Columns
                 searchResult.InventoryItem?.FormattedName ?? searchResult.Item.NameString,
                 searchResult.InventoryItem?.ItemColour ?? ImGuiColors.DalamudWhite);
         }
-        public override string Name { get; set; } = "Name";
+        public override string Name { get; set; } = "名称";
+        [Newtonsoft.Json.JsonIgnore]
+        public override string ExportName => "Name";
         public override float Width { get; set; } = 250.0f;
-        public override string HelpText { get; set; } = "The name of the item.";
+        public override string HelpText { get; set; } = "物品名称。";
         public override bool HasFilter { get; set; } = true;
         public override ColumnFilterType FilterType { get; set; } = ColumnFilterType.Text;
 

@@ -19,12 +19,12 @@ public class TooltipDisplayGlamourReadySetSetting : BooleanSetting
     }
 
     public override string Key { get; set; } = "TooltipDisplayGlamourReadySet";
-    public override string Name { get; set; } = "Outfit Glamour Info";
+    public override string Name { get; set; } = "组合投影信息";
 
-    public override string WizardName { get; } = "Outfit Glamour Info";
+    public override string WizardName { get; } = "组合投影信息";
 
     public override string HelpText { get; set; } =
-        "When hovering an item, show whether it is a Outfit Glamour Set or part of one, along with which component items you already have in your Armory Chest or Armoire.";
+        "悬停物品时，显示其组合投影套装信息，以及兵装库或收藏柜中已拥有的部件。";
     
     public override string Version => "1.12.0.0";
 

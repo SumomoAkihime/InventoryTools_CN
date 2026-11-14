@@ -18,10 +18,10 @@ namespace InventoryTools.Logic.Settings
         }
 
         public override string Key { get; set; } = "ShowFiltersTab";
-        public override string Name { get; set; } = "Show 'All Lists' Tab?";
+        public override string Name { get; set; } = "显示“全部列表”标签页";
 
         public override string HelpText { get; set; } =
-            "Should the main window show the tab called 'All Lists' containing all available lists in one tab?";
+            "是否在主窗口显示包含全部列表的“全部列表”标签页";
         
         public override string Version => "1.7.0.0";
 

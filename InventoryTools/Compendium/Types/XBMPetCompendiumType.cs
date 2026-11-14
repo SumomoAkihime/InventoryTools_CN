@@ -128,14 +128,14 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
             new CompendiumGrouping<AllaganLib.GameSheets.LuminaSheets.XBMPet>()
             {
                 Key = "family",
-                Name = "Family",
+                Name = "种类",
                 GroupFunc = row => row.Classification,
                 GroupMapping = family => GetFamilyName((byte)family),
             },
             new CompendiumGrouping<AllaganLib.GameSheets.LuminaSheets.XBMPet>()
             {
                 Key = "location_type",
-                Name = "Location Type",
+                Name = "位置类型",
                 GroupFunc = row => GetLocationType(row),
                 GroupMapping = locationType => GetLocationTypeName((XBMPetLocationType)locationType),
             },
@@ -148,7 +148,7 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
         {
             Key = "icon",
             Name = "##Icon",
-            HelpText = "The icon of the familiar",
+            HelpText = "使魔图标",
             Version = "15.0.14",
             ValueSelector = GetIcon,
             CompendiumType = this,
@@ -157,8 +157,8 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
         builder.AddStringColumn(new()
         {
             Key = "name",
-            Name = "Name",
-            HelpText = "The name of the familiar",
+            Name = "名称",
+            HelpText = "使魔名称",
             Version = "15.0.14",
             ValueSelector = GetName,
         });
@@ -169,8 +169,8 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
             builder.AddStringColumn(new()
             {
                 Key = "family",
-                Name = "Family",
-                HelpText = "The monster family of the familiar",
+                Name = "种类",
+                HelpText = "使魔的怪物种类",
                 Version = "15.0.14",
                 ValueSelector = row => GetFamilyName(row.Classification),
             });
@@ -179,8 +179,8 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
         builder.AddCompendiumLinkColumn(new()
         {
             Key = "location",
-            Name = "Location",
-            HelpText = "The zone or duty where the familiar is found. Click to open the zone or duty.",
+            Name = "位置",
+            HelpText = "使魔所在的区域或副本，点击可打开。",
             Version = "15.0.14",
             ValueSelector = GetLocationName,
             RowRefSelector = GetLocationRowRef,
@@ -191,8 +191,8 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
             builder.AddStringColumn(new()
             {
                 Key = "location_type",
-                Name = "Location Type",
-                HelpText = "Is the familiar found in a zone or in a duty?",
+                Name = "位置类型",
+                HelpText = "使魔位于野外区域还是副本",
                 Version = "15.0.14",
                 ValueSelector = row => GetLocationTypeName(GetLocationType(row)),
             });
@@ -201,40 +201,40 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
         builder.AddStringColumn(new()
         {
             Key = "weaponskill",
-            Name = "Weaponskill",
-            HelpText = "The weaponskill the familiar can be ordered to use",
+            Name = "战技",
+            HelpText = "可命令使魔使用的战技",
             Version = "15.0.14",
             ValueSelector = row => FormatSkillSummary(GetAbility(row, WeaponskillAbilityIndex), row.Description.ToImGuiString()),
         });
         builder.AddStringColumn(new()
         {
             Key = "ability",
-            Name = "Ability",
-            HelpText = "The ability the familiar can use under the effect of One with Nature",
+            Name = "能力",
+            HelpText = "使魔在 One with Nature 效果下可使用的能力",
             Version = "15.0.14",
             ValueSelector = row => FormatSkillSummary(GetAbility(row, NatureAbilityIndex), row.TrickDescription.ToImGuiString()),
         });
         builder.AddStringColumn(new()
         {
             Key = "auto_attack",
-            Name = "Auto-attack",
-            HelpText = "Is the familiar's auto-attack melee or ranged?",
+            Name = "自动攻击",
+            HelpText = "使魔的自动攻击为近战还是远程",
             Version = "15.0.14",
             ValueSelector = GetAutoAttackType,
         });
         builder.AddItemColumn(new()
         {
             Key = "unlock_item",
-            Name = "Unlock Item",
-            HelpText = "The item that unlocks the familiar, if one exists",
+            Name = "解锁物品",
+            HelpText = "解锁此使魔的物品（如有）",
             Version = "15.0.14",
             ValueSelector = row => GetUnlockItem(row)?.Item.RowId,
         });
         builder.AddItemSourcesColumn(new()
         {
             Key = "unlock_item_sources",
-            Name = "Unlock Item Sources",
-            HelpText = "The sources of the item that unlocks the familiar",
+            Name = "解锁物品来源",
+            HelpText = "解锁使魔所需物品的来源",
             Version = "15.0.14",
             ValueSelector = GetUnlockItemSources,
         });
@@ -246,19 +246,19 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
         viewBuilder.Description = row.Description.ToImGuiString();
 
         var locationType = GetLocationType(row);
-        viewBuilder.AddTag(() => GetFamilyName(row.Classification), () => "The monster family of the familiar.");
-        viewBuilder.AddTag(() => "Auto-attack: " + GetAutoAttackType(row), () => "The range of the familiar's auto-attack.");
+        viewBuilder.AddTag(() => GetFamilyName(row.Classification), () => "使魔的怪物种类。");
+        viewBuilder.AddTag(() => "自动攻击： " + GetAutoAttackType(row), () => "使魔的自动攻击距离。");
 
         viewBuilder.AddMetadataSection(new MetadataSectionOptions()
         {
             SectionKey = "details",
-            SectionName = "Details",
+            SectionName = "详情",
             Rows =
             [
-                new MetadataSectionOptions.Row { Label = "Family", Value = () => GetFamilyName(row.Classification) },
-                new MetadataSectionOptions.Row { Label = "Location", Value = () => GetLocationName(row) },
-                new MetadataSectionOptions.Row { Label = "Location Type", Value = () => GetLocationTypeName(locationType) },
-                new MetadataSectionOptions.Row { Label = "Auto-attack", Value = () => GetAutoAttackType(row) },
+                new MetadataSectionOptions.Row { Label = "种类", Value = () => GetFamilyName(row.Classification) },
+                new MetadataSectionOptions.Row { Label = "位置", Value = () => GetLocationName(row) },
+                new MetadataSectionOptions.Row { Label = "位置类型", Value = () => GetLocationTypeName(locationType) },
+                new MetadataSectionOptions.Row { Label = "自动攻击", Value = () => GetAutoAttackType(row) },
             ],
         });
 
@@ -267,17 +267,17 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
         viewBuilder.AddMetadataSection(new MetadataSectionOptions()
         {
             SectionKey = "skills",
-            SectionName = "Skills",
+            SectionName = "技能",
             Rows =
             [
                 new MetadataSectionOptions.Row
                 {
-                    Label = weaponskill?.Name.ToImGuiString() ?? "Weaponskill",
+                    Label = weaponskill?.Name.ToImGuiString() ?? "战技",
                     Value = () => GetSkillDescription(weaponskill, row.TrickDescription.ToImGuiString()),
                 },
                 new MetadataSectionOptions.Row
                 {
-                    Label = natureAbility?.Name.ToImGuiString() ?? "Ability",
+                    Label = natureAbility?.Name.ToImGuiString() ?? "能力",
                     Value = () => GetSkillDescription(natureAbility, row.TemperedDescription.ToImGuiString()),
                 },
             ],
@@ -289,7 +289,7 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
             viewBuilder.AddSingleRowRefSection(new SingleRowRefSectionOptions()
             {
                 SectionKey = "location",
-                SectionName = locationType == XBMPetLocationType.Duty ? "Related Duty" : "Related Zone",
+                SectionName = locationType == XBMPetLocationType.Duty ? "相关副本" : "相关区域",
                 RelatedRef = locationRef.Value,
             });
         }
@@ -300,13 +300,13 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
             viewBuilder.AddSingleRowRefSection(new SingleRowRefSectionOptions()
             {
                 SectionKey = "unlock_item",
-                SectionName = "Unlock Item",
+                SectionName = "解锁物品",
                 RelatedRef = unlockItem.Item.Base.AsUntypedRowRef(),
             });
             viewBuilder.AddItemSourcesSection(new ItemSourcesSectionOptions()
             {
                 SectionKey = "unlock_item_sources",
-                SectionName = "Unlock Item Sources",
+                SectionName = "解锁物品来源",
                 Sources = GetUnlockItemSources(row),
                 SourceType = SourceType.Source,
             });
@@ -370,7 +370,7 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
             _ => null,
         };
 
-        return string.IsNullOrEmpty(locationName) ? "Unknown" : locationName;
+        return string.IsNullOrEmpty(locationName) ? "未知" : locationName;
     }
 
     public TerritoryType? GetTerritoryType(AllaganLib.GameSheets.LuminaSheets.XBMPet row)
@@ -485,25 +485,25 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
         var action = _actionSheet.GetRowOrDefault(row.Action.RowId);
         if (action == null || row.Action.RowId == 0)
         {
-            return "Unknown";
+            return "未知";
         }
 
-        return action.Value.Range > 5 ? "Ranged" : "Melee";
+        return action.Value.Range > 5 ? "远程" : "近战";
     }
 
     private string GetFamilyName(byte family)
     {
         return family switch
         {
-            1 => "Beastkin",
-            2 => "Vilekin",
-            3 => "Cloudkin",
-            4 => "Seedkin",
-            5 => "Wavekin",
-            6 => "Scalekin",
-            7 => "Soulkin",
-            8 => "Ashkin",
-            _ => "Unknown",
+            1 => "野兽",
+            2 => "百虫",
+            3 => "飞禽",
+            4 => "草木",
+            5 => "水产",
+            6 => "甲鳞",
+            7 => "魔法生物",
+            8 => "不死生物",
+            _ => "未知",
         };
     }
 
@@ -511,15 +511,15 @@ public class XBMPetCompendiumType : CompendiumType<AllaganLib.GameSheets.LuminaS
     {
         return locationType switch
         {
-            XBMPetLocationType.Zone => "Zone",
-            XBMPetLocationType.Duty => "Duty",
-            _ => "None",
+            XBMPetLocationType.Zone => "区域",
+            XBMPetLocationType.Duty => "任务副本",
+            _ => "无",
         };
     }
 
-    public override string Singular => "Familiar";
-    public override string Plural => "Familiars";
-    public override string Description => "Familiars that can be tamed by the beastmaster.";
+    public override string Singular => "使魔";
+    public override string Plural => "使魔";
+    public override string Description => "驯兽师可驯服的使魔。";
     public override string Key => "familiars";
     public override (string?, uint?) Icon => (null, 242001);
 }

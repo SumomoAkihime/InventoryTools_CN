@@ -44,7 +44,7 @@ public class CompendiumListWindow : CompendiumWindow
 
     public delegate Owned<CompendiumListWindow> Factory(ICompendiumType compendiumType);
 
-    public CompendiumListWindow(ILogger<CompendiumListWindow> logger, WindowState windowState, CompendiumSectionStateService sectionStateService, MediatorService mediator, ImGuiService imGuiService, InventoryToolsConfiguration configuration, ICompendiumType compendiumType, IPluginLog pluginLog, IEnumerable<IMenuWindow> menuWindows, IEnumerable<ICompendiumType> compendiumTypes) : base(logger, mediator, imGuiService, configuration, compendiumType.Plural + " Window")
+    public CompendiumListWindow(ILogger<CompendiumListWindow> logger, WindowState windowState, CompendiumSectionStateService sectionStateService, MediatorService mediator, ImGuiService imGuiService, InventoryToolsConfiguration configuration, ICompendiumType compendiumType, IPluginLog pluginLog, IEnumerable<IMenuWindow> menuWindows, IEnumerable<ICompendiumType> compendiumTypes) : base(logger, mediator, imGuiService, configuration, compendiumType.Plural + " 窗口")
     {
         _windowState = windowState;
         _sectionStateService = sectionStateService;
@@ -206,26 +206,26 @@ public class CompendiumListWindow : CompendiumWindow
             {
                 if (menuBar)
                 {
-                    using (var menu = ImRaii.Menu("File"))
+                    using (var menu = ImRaii.Menu("文件"))
                     {
                         if (menu)
                         {
-                            if (ImGui.MenuItem("Configuration"))
+                            if (ImGui.MenuItem("设置"))
                             {
                                 this.MediatorService.Publish(new OpenGenericWindowMessage(typeof(ConfigurationWindow)));
                             }
 
-                            if (ImGui.MenuItem("Changelog"))
+                            if (ImGui.MenuItem("更新日志"))
                             {
                                 this.MediatorService.Publish(new OpenGenericWindowMessage(typeof(ChangelogWindow)));
                             }
 
-                            if (ImGui.MenuItem("Help"))
+                            if (ImGui.MenuItem("帮助"))
                             {
                                 this.MediatorService.Publish(new OpenGenericWindowMessage(typeof(HelpWindow)));
                             }
 
-                            if (ImGui.MenuItem("Enable Verbose Logging", "",
+                            if (ImGui.MenuItem("启用详细日志", "",
                                     this._pluginLog.MinimumLogLevel == LogEventLevel.Verbose))
                             {
                                 if (this._pluginLog.MinimumLogLevel == LogEventLevel.Verbose)
@@ -238,12 +238,12 @@ public class CompendiumListWindow : CompendiumWindow
                                 }
                             }
 
-                            if (ImGui.MenuItem("Generate Support Dump"))
+                            if (ImGui.MenuItem("生成诊断信息"))
                             {
                                 this.MediatorService.Publish(new OpenGenericWindowMessage(typeof(SupportDumpWindow)));
                             }
 
-                            if (ImGui.MenuItem("Report a Issue"))
+                            if (ImGui.MenuItem("报告问题"))
                             {
                                 "https://github.com/Critical-Impact/InventoryTools".OpenBrowser();
                             }
@@ -253,7 +253,7 @@ public class CompendiumListWindow : CompendiumWindow
                                 "https://ko-fi.com/critical_impact".OpenBrowser();
                             }
 
-                            if (ImGui.MenuItem("Close"))
+                            if (ImGui.MenuItem("关闭"))
                             {
                                 this.IsOpen = false;
                             }
@@ -264,11 +264,11 @@ public class CompendiumListWindow : CompendiumWindow
                     var groupings = _compendiumType.GetGroupings();
                     if (groupings != null)
                     {
-                        using (var groupingMenu = ImRaii.Menu("Group By"))
+                        using (var groupingMenu = ImRaii.Menu("分组依据"))
                         {
                             if (groupingMenu)
                             {
-                                if (ImGui.MenuItem("None", _compendiumGrouping == null))
+                                if (ImGui.MenuItem("无", _compendiumGrouping == null))
                                 {
                                     _compendiumGrouping = null;
                                     _lastFollowedGroup = null;
@@ -290,7 +290,7 @@ public class CompendiumListWindow : CompendiumWindow
 
                     DrawCurrentGroupMenu();
 
-                    using (var menu = ImRaii.Menu("Windows"))
+                    using (var menu = ImRaii.Menu("窗口"))
                     {
                         if (menu)
                         {
@@ -304,7 +304,7 @@ public class CompendiumListWindow : CompendiumWindow
                         }
                     }
 
-                    using (var menu = ImRaii.Menu("Compendium"))
+                    using (var menu = ImRaii.Menu("图鉴"))
                     {
                         if (menu)
                         {
@@ -322,7 +322,7 @@ public class CompendiumListWindow : CompendiumWindow
                     {
                         using (ImRaii.Tooltip())
                         {
-                            ImGui.Text("Compendium is a WIP feature, expect more here soon!");
+                            ImGui.Text("图鉴功能仍在开发中，后续将继续补充内容！");
                         }
                     }
 
@@ -338,7 +338,7 @@ public class CompendiumListWindow : CompendiumWindow
             return;
         }
 
-        var label = grouping.CurrentGroupLabel ?? "Current " + grouping.Name;
+        var label = grouping.CurrentGroupLabel ?? "当前 " + grouping.Name;
         using var menu = ImRaii.Menu(label);
         if (!menu)
         {
@@ -349,7 +349,7 @@ public class CompendiumListWindow : CompendiumWindow
         var canShow = currentGroup != null && HasTab(currentGroup);
         using (ImRaii.Disabled(!canShow))
         {
-            if (ImGui.MenuItem("Show " + label) && currentGroup != null)
+            if (ImGui.MenuItem("显示 " + label) && currentGroup != null)
             {
                 _pendingTab = currentGroup;
             }
@@ -360,13 +360,13 @@ public class CompendiumListWindow : CompendiumWindow
             using (ImRaii.Tooltip())
             {
                 ImGui.TextUnformatted(currentGroup == null
-                    ? "You are not in a " + grouping.Name.ToLower() + " this list can show."
-                    : "There are no " + _compendiumType.Plural.ToLower() + " recorded in " + (grouping.GroupMapping?.Invoke(currentGroup) ?? currentGroup.ToString()) + ".");
+                    ? "当前不在 " + grouping.Name.ToLower() + "，此列表可显示。"
+                    : "暂无 " + _compendiumType.Plural.ToLower() + "，记录于 " + (grouping.GroupMapping?.Invoke(currentGroup) ?? currentGroup.ToString()) + ".");
             }
         }
 
         var follow = IsFollowingCurrentGroup(grouping);
-        if (ImGui.MenuItem("Follow " + label, "", follow))
+        if (ImGui.MenuItem("跟随 " + label, "", follow))
         {
             SetFollowingCurrentGroup(grouping, !follow);
 
@@ -377,7 +377,7 @@ public class CompendiumListWindow : CompendiumWindow
         {
             using (ImRaii.Tooltip())
             {
-                ImGui.TextUnformatted("When " + label.ToLower() + " changes, open its tab.");
+                ImGui.TextUnformatted("当 " + label.ToLower() + "发生变化时，打开对应标签页。");
             }
         }
     }
@@ -389,7 +389,7 @@ public class CompendiumListWindow : CompendiumWindow
 
     public override FilterConfiguration? SelectedConfiguration => null;
     public override string GenericKey => CompendiumType.Plural.ToLower();
-    public override string GenericName => CompendiumType.Plural + " Window";
+    public override string GenericName => CompendiumType.Plural + " 窗口";
     public override bool DestroyOnClose => true;
     public override bool SaveState => false;
     public override Vector2? DefaultSize => new Vector2(800, 500);

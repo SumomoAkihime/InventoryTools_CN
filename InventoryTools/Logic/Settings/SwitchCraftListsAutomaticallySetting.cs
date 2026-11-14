@@ -18,10 +18,10 @@ namespace InventoryTools.Logic.Settings
         }
 
         public override string Key { get; set; } = "SwitchCraftListsAutomatically";
-        public override string Name { get; set; } = "Switch craft lists automatically?";
+        public override string Name { get; set; } = "自动切换制作清单";
 
         public override string HelpText { get; set; } =
-            "Should the active craft list automatically change when moving between each craft list? The active craft list will only change if there is an active craft list already selected.";
+            "切换制作清单窗口时是否自动切换当前活动清单，仅在已有活动清单时生效";
 
         public override string Version => "1.7.0.0";
 

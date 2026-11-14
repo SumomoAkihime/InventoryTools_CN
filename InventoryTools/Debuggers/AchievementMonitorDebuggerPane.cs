@@ -16,7 +16,7 @@ public class AchievementDebuggerPane : DebugLogPane
         _achievementMonitorService = achievementMonitorService;
     }
 
-    public override string Name => "Achievement Monitor";
+    public override string Name => "成就监视器";
 
     public override void SubscribeToEvents()
     {

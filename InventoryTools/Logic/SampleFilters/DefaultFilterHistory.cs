@@ -39,11 +39,11 @@ public class DefaultFilterHistory : ISampleFilter
         return allItemsFilter;
     }
 
-    public string Name => "History";
-    public string SampleDefaultName => "History";
+    public string Name => "历史记录";
+    public string SampleDefaultName => "历史记录";
 
     public string SampleDescription =>
-        "This will add a list that shows you the movement of items in your inventories. History tracking must be enabled for this to function.";
+        "添加显示库存物品移动的列表，需要启用历史追踪。";
 
     public SampleFilterType SampleFilterType => SampleFilterType.Default;
 }

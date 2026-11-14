@@ -31,10 +31,12 @@ public class RecipeUnlockedColumn : CheckboxColumn
         return requirements.All(r => r.IsMet);
     }
 
-    public override string Name { get; set; } = "Is Recipe Unlocked?";
-    public override string RenderName => "Recipe Unlocked?";
+    public override string Name { get; set; } = "是否已解锁配方";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Is Recipe Unlocked?";
+    public override string RenderName => "是否已解锁配方";
     public override float Width { get; set; } = 140.0f;
-    public override string HelpText { get; set; } = "Shows whether all requirements to craft this item (job level, mastery book, specialization) are met by the current character.";
+    public override string HelpText { get; set; } = "显示当前角色是否满足制作此物品的全部条件，包括职业等级、秘籍和专家资格。";
     public override bool HasFilter { get; set; } = true;
     public override ColumnFilterType FilterType { get; set; } = ColumnFilterType.Boolean;
     public override FilterType DefaultIn => Logic.FilterType.GameItemFilter;

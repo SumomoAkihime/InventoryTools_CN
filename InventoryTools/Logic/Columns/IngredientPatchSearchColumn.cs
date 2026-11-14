@@ -33,9 +33,11 @@ public class IngredientPatchSearchColumn : DecimalColumn
 
 
 
-    public override string Name { get; set; } = "Ingredient Patch Search";
+    public override string Name { get; set; } = "材料版本搜索";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Ingredient Patch Search";
     public override float Width { get; set; } = 100;
 
     public override string HelpText { get; set; } =
-        "Shows a number indicating the highest patch a craft material is used in.";
+        "显示制作材料最终使用到的最高版本号。";
 }

@@ -18,7 +18,7 @@ public class AddonOffsetFinderDebuggerPane : DebugLogPane
         _gameGui = gameGui;
     }
 
-    public override string Name => "Addon Offset Finder";
+    public override string Name => "游戏界面偏移查找器";
     public override unsafe void DrawInfo()
     {
         ImGui.InputText("Addon Name", ref _addonName, 100);

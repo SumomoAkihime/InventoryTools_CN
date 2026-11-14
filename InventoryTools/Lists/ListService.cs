@@ -119,7 +119,7 @@ namespace InventoryTools.Lists
                 ValidateAndInjectListColumns(list);
                 if (list.Name == string.Empty)
                 {
-                    list.Name = "Untitled List";
+                    list.Name = "未命名列表";
                 }
             }
             return new ConcurrentDictionary<string, FilterConfiguration>(savedLists.ToDictionary(c => c.Key, c => c));
@@ -363,7 +363,7 @@ namespace InventoryTools.Lists
         public FilterConfiguration AddNewCraftList(string? newName = null, bool? isEphemeral = false)
         {
             var isEphemeralNN = isEphemeral ?? false;
-            var newNameNN = newName ?? (isEphemeralNN ? "New Ephemeral List" : "New Craft List");
+            var newNameNN = newName ?? (isEphemeralNN ? "新临时列表" : "新制作清单");
 
             var names = Lists.Where(c =>
                 c.FilterType == FilterType.CraftFilter && !c.CraftListDefault &&
@@ -390,7 +390,7 @@ namespace InventoryTools.Lists
 
         public FilterConfiguration AddNewCuratedList(string? name = null)
         {
-            name ??= "New Curated List";
+            name ??= "新精选列表";
 
             var names = Lists.Where(c =>
                 c.FilterType == FilterType.CuratedList).Select(c => c.Name).Distinct().ToHashSet();
@@ -874,7 +874,7 @@ namespace InventoryTools.Lists
 
         public void InvalidateLists(FilterType? filterType = null)
         {
-            _chatUtilities.PrintLog("Filters invalidated");
+            _chatUtilities.PrintLog("筛选器已失效");
             foreach (var filter in _lists)
             {
                 if(filterType != null && filter.Value.FilterType != filterType) continue;
@@ -974,7 +974,7 @@ namespace InventoryTools.Lists
         public FilterConfiguration GenerateDefaultCraftList()
         {
             var defaultFilter = _filterConfigFactory.Invoke();
-            defaultFilter.Name = "Default Craft List";
+            defaultFilter.Name = "默认制作清单";
             defaultFilter.FilterType = FilterType.CraftFilter;
             AddDefaultColumns(defaultFilter);
             defaultFilter.ApplyDefaultCraftFilterConfiguration();

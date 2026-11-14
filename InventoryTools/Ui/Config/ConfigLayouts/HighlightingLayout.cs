@@ -7,41 +7,41 @@ public class HighlightingLayout : ConfigLayout
 {
     public override PageLayout Build()
     {
-        return Page("highlighting", "Highlighting",
-            Paragraph("Highlighting tints inventory slots and bag tabs when a list matches the items inside them. These are the defaults, individual lists can override most of them."),
-            Section("Active lists",
-                Paragraph("Highlighting is generally controlled by hitting the 'Highlight' button within the various windows and via slash commands, you can toggle highlight on/off here as well."),
+        return Page("highlighting", "高亮",
+            Paragraph("列表匹配物品时会为库存格子和背包标签着色。以下是默认设置，各列表可覆盖其中多数选项。"),
+            Section("活动列表",
+                Paragraph("通常可通过各窗口中的“高亮”按钮或斜杠命令控制高亮，也可在此切换。"),
                 Setting<WindowFilterSetting>(),
                 Setting<BackgroundFilterSetting>(),
                 Setting<SaveBackgroundFilterSetting>("Remember the choice between sessions")
             ),
-            Section("When to highlight",
+            Section("高亮条件",
                 Setting<HighlightWhenSetting>(),
                 Setting<InvertHighlightingSetting>(),
                 Setting<InvertTabHighlightingSetting>()),
-            Section("Colours",
-                Setting<HighlightColourSetting>("Matched item colour"),
-                Setting<TabHighlightColourSetting>("Matching tab colour")),
-            Section("Destinations",
-                Paragraph("Sort lists know where items are meant to end up. The destination bag can be highlighted alongside the source so you can see both ends of a move at once."),
+            Section("颜色",
+                Setting<HighlightColourSetting>("匹配物品颜色"),
+                Setting<TabHighlightColourSetting>("匹配标签页颜色")),
+            Section("目标位置",
+                Paragraph("整理列表记录物品的目标位置，可同时高亮来源和目标背包，方便查看移动的两端。"),
                 Setting<HighlightDestinationSetting>(),
                 EnabledBy<HighlightDestinationSetting>(
                     Setting<HighlightDestinationEmptySetting>(),
                     Setting<InvertDestinationHighlightingSetting>(),
-                    Setting<HighlightDestinationColourSetting>("Destination colour"))),
-            Section("Retainer list",
-                Paragraph("The summoning bell list can be annotated when a retainer holds items one of your lists cares about, so you know which to open without checking each one."),
-                Setting<ColourRetainerListSetting>("Colour retainer names"),
+                    Setting<HighlightDestinationColourSetting>("目标位置颜色"))),
+            Section("雇员列表",
+                Paragraph("雇员持有列表关注的物品时，可在传唤铃列表添加标注，方便选择需要打开的雇员。"),
+                Setting<ColourRetainerListSetting>("为雇员名称着色"),
                 EnabledBy<ColourRetainerListSetting>(
-                    Setting<RetainerListColourSetting>("Name colour")),
-                Setting<ShowItemNumberRetainerListSetting>("Show item counts")),
-            Section("Shop highlighting",
-                Paragraph("While a vendor window is open, shop items matched by a list can be highlighted, and the vendors that sell them can be marked out in the world."),
-                Setting<ShopHighlightingDisableItemsSetting>("Dim items that don't match"),
-                Setting<ShopHighlightingNpcSetting>("Highlight vendor NPCs in the world"),
+                    Setting<RetainerListColourSetting>("名称颜色")),
+                Setting<ShowItemNumberRetainerListSetting>("显示物品数量")),
+            Section("商店高亮",
+                Paragraph("商店窗口打开时，可高亮列表匹配的物品，并标记场景中出售这些物品的商人。"),
+                Setting<ShopHighlightingDisableItemsSetting>("调暗不匹配的物品"),
+                Setting<ShopHighlightingNpcSetting>("高亮场景中的商人 NPC"),
                 EnabledBy<ShopHighlightingNpcSetting>(
-                    Setting<ShopHighlightingNpcColorSetting>("Highlight colour"),
-                    Setting<ShopHighlightingNpcNameplateIconSetting>("Show an icon on their nameplate")))
+                    Setting<ShopHighlightingNpcColorSetting>("高亮颜色"),
+                    Setting<ShopHighlightingNpcNameplateIconSetting>("在名牌上显示图标")))
         );
     }
 }

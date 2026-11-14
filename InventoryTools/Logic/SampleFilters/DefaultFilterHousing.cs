@@ -39,11 +39,11 @@ public class DefaultFilterHousing : ISampleFilter
         return allItemsFilter;
     }
 
-    public string Name => "Housing";
-    public string SampleDefaultName => "Housing";
+    public string Name => "房屋";
+    public string SampleDefaultName => "房屋";
 
     public string SampleDescription =>
-        "This will add a list that will be preconfigured to show all items stored in the houses your character owns.";
+        "添加预配置列表，显示角色所拥有房屋中的全部物品。";
 
     public SampleFilterType SampleFilterType => SampleFilterType.Default;
 }

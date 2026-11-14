@@ -7,13 +7,13 @@ public class CraftOverlayLayout : ConfigLayout
 {
     public override PageLayout Build()
     {
-        return Page("craft-overlay", "Craft Overlay",
-            Paragraph("A compact panel that follows your active craft list while you are in the game, so you can see what is still needed without opening a window."),
-            Section("Display",
-                Setting<CraftOverlayMaxExpandedItemsSetting>("Items shown when expanded"),
-                Setting<CraftOverlayHideSetting>("Hide during duties and cutscenes")),
-            Section("Behaviour",
-                Setting<CraftOverlayRememberStateSetting>("Stay open across reloads"))
+        return Page("craft-overlay", "制作悬浮窗",
+            Paragraph("游戏内跟随当前制作清单的紧凑面板，可直接查看尚缺的物品。"),
+            Section("显示",
+                Setting<CraftOverlayMaxExpandedItemsSetting>("展开时显示的物品"),
+                Setting<CraftOverlayHideSetting>("副本及过场动画中隐藏")),
+            Section("行为",
+                Setting<CraftOverlayRememberStateSetting>("重新加载后保持打开"))
         );
     }
 }

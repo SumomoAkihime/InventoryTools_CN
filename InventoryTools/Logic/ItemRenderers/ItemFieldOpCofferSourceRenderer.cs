@@ -28,17 +28,17 @@ public abstract class ItemFieldOpCofferSourceRenderer<T> : ItemInfoRenderer<T> w
     public override Action<ItemSource> DrawTooltip => source =>
     {
         var asSource = AsSource(source);
-        ImGui.Text("Drops from " + asSource.CofferType + " coffer");
+        ImGui.Text("掉落自 " + asSource.CofferType + " coffer");
         if (asSource.Min != null && asSource.Max != null)
         {
             ImGui.SameLine();
             if (asSource.Min == asSource.Max)
             {
-                ImGui.Text("(Drops 1)");
+                ImGui.Text("（掉落 1）");
             }
             else
             {
-                ImGui.Text("(Drops " + asSource.Min.Value + " - " + asSource.Max.Value + ")");
+                ImGui.Text("（掉落 " + asSource.Min.Value + " - " + asSource.Max.Value + ")");
             }
         }
 
@@ -69,8 +69,8 @@ public class ItemPagosTreasureSourceRenderer : ItemFieldOpCofferSourceRenderer<I
     {
     }
 
-    public override string SingularName => "Eureka Pagos (Treasure Coffer)";
-    public override string HelpText => "Does this item drop from a pagos treasure coffer?";
+    public override string SingularName => "优雷卡恒冰之地（宝箱）";
+    public override string HelpText => "物品是否掉落自优雷卡恒冰之地宝箱";
 }
 
 public class ItemPyrosTreasureSourceRenderer : ItemFieldOpCofferSourceRenderer<ItemPyrosTreasureCofferSource>
@@ -82,8 +82,8 @@ public class ItemPyrosTreasureSourceRenderer : ItemFieldOpCofferSourceRenderer<I
     {
     }
 
-    public override string SingularName => "Eureka Pyros (Treasure Coffer)";
-    public override string HelpText => "Does this item drop from a pyros treasure coffer?";
+    public override string SingularName => "优雷卡涌火之地（宝箱）";
+    public override string HelpText => "物品是否掉落自优雷卡涌火之地宝箱";
 }
 
 public class ItemHydatosTreasureSourceRenderer : ItemFieldOpCofferSourceRenderer<ItemHydatosTreasureCofferSource>
@@ -95,8 +95,8 @@ public class ItemHydatosTreasureSourceRenderer : ItemFieldOpCofferSourceRenderer
     {
     }
 
-    public override string SingularName => "Eureka Hydatos (Treasure Coffer)";
-    public override string HelpText => "Does this item drop from a hydatos treasure coffer?";
+    public override string SingularName => "优雷卡丰水之地（宝箱）";
+    public override string HelpText => "物品是否掉落自优雷卡丰水之地宝箱";
 }
 
 public class ItemOccultTreasureSourceRenderer : ItemFieldOpCofferSourceRenderer<ItemOccultTreasureCofferSource>
@@ -108,8 +108,8 @@ public class ItemOccultTreasureSourceRenderer : ItemFieldOpCofferSourceRenderer<
     {
     }
 
-    public override string SingularName => "Occult Crescent - South Horn (Treasure Coffer)";
-    public override string HelpText => "Does this item drop from a treasure coffer in the South Horn of the Occult Crescent?";
+    public override string SingularName => "Occult Crescent－南角（宝箱）";
+    public override string HelpText => "物品是否掉落自 Occult Crescent 南角的宝箱";
 }
 
 public class ItemOccultPotSourceRenderer : ItemFieldOpCofferSourceRenderer<ItemOccultPotSource>
@@ -121,8 +121,8 @@ public class ItemOccultPotSourceRenderer : ItemFieldOpCofferSourceRenderer<ItemO
     {
     }
 
-    public override string SingularName => "Occult Crescent - South Horn (Pot)";
-    public override string HelpText => "Does this item drop from a pot in the South Horn of the Occult Crescent?";
+    public override string SingularName => "Occult Crescent－南角（陶罐）";
+    public override string HelpText => "物品是否掉落自 Occult Crescent 南角的陶罐";
 }
 
 public class ItemOccultGoldenCofferSourceRenderer : ItemFieldOpCofferSourceRenderer<ItemOccultGoldenCofferSource>
@@ -134,8 +134,8 @@ public class ItemOccultGoldenCofferSourceRenderer : ItemFieldOpCofferSourceRende
     {
     }
 
-    public override string SingularName => "Occult Crescent - South Horn (Golden Coffer)";
-    public override string HelpText => "Does this item drop from a golden coffer in the South Horn of the Occult Crescent?";
+    public override string SingularName => "Occult Crescent－南角（黄金宝箱）";
+    public override string HelpText => "物品是否掉落自 Occult Crescent 南角的黄金宝箱";
 }
 
 public class ItemOccultNorthHornTreasureSourceRenderer : ItemFieldOpCofferSourceRenderer<ItemOccultNorthHornTreasureCofferSource>
@@ -147,8 +147,8 @@ public class ItemOccultNorthHornTreasureSourceRenderer : ItemFieldOpCofferSource
     {
     }
 
-    public override string SingularName => "Occult Crescent - North Horn (Treasure Coffer)";
-    public override string HelpText => "Does this item drop from a treasure coffer in the North Horn of the Occult Crescent?";
+    public override string SingularName => "Occult Crescent－北角（宝箱）";
+    public override string HelpText => "物品是否掉落自 Occult Crescent 北角的宝箱";
 }
 
 public class ItemOccultNorthHornPotSourceRenderer : ItemFieldOpCofferSourceRenderer<ItemOccultNorthHornPotSource>
@@ -160,8 +160,8 @@ public class ItemOccultNorthHornPotSourceRenderer : ItemFieldOpCofferSourceRende
     {
     }
 
-    public override string SingularName => "Occult Crescent - North Horn (Pot)";
-    public override string HelpText => "Does this item drop from a pot in the North Horn of the Occult Crescent?";
+    public override string SingularName => "Occult Crescent－北角（陶罐）";
+    public override string HelpText => "物品是否掉落自 Occult Crescent 北角的陶罐";
 }
 
 public class ItemOccultNorthHornGoldenCofferSourceRenderer : ItemFieldOpCofferSourceRenderer<ItemOccultNorthHornGoldenCofferSource>
@@ -173,6 +173,6 @@ public class ItemOccultNorthHornGoldenCofferSourceRenderer : ItemFieldOpCofferSo
     {
     }
 
-    public override string SingularName => "Occult Crescent - North Horn (Golden Coffer)";
-    public override string HelpText => "Does this item drop from a golden coffer in the North Horn of the Occult Crescent?";
+    public override string SingularName => "Occult Crescent－北角（黄金宝箱）";
+    public override string HelpText => "物品是否掉落自 Occult Crescent 北角的黄金宝箱";
 }

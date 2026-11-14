@@ -18,12 +18,12 @@ public class ItemSkybuilderInspectionUseRenderer : ItemSkybuilderInspectionSourc
     }
 
     public override RendererType RendererType => RendererType.Use;
-    public override string HelpText => "Is the item the approved form of a item that must be inspected at the firmament?";
+    public override string HelpText => "物品是否为需要在天穹街审核的素材的合格形态";
     public override Action<ItemSource> DrawTooltip => source =>
     {
         var asSource = AsSource(source);
-        ImGui.Text($"Reward: {asSource.Item.NameString}");
-        ImGui.Text($"Required: {asSource.InspectionData.AmountRequired}");
+        ImGui.Text($"奖励： {asSource.Item.NameString}");
+        ImGui.Text($"所需： {asSource.InspectionData.AmountRequired}");
     };
 }
 
@@ -39,15 +39,15 @@ public class ItemSkybuilderInspectionSourceRenderer : ItemInfoRenderer<ItemSkybu
     }
     public override RendererType RendererType => RendererType.Source;
     public override ItemInfoType Type => ItemInfoType.SkybuilderInspection;
-    public override string SingularName => "Sky Builder Inspection";
-    public override string HelpText => "Can the item be inspected at the firmament to convert it into the approved form?";
+    public override string SingularName => "天穹街资源审核";
+    public override string HelpText => "物品是否可在天穹街审核为合格素材";
     public override bool ShouldGroup => true;
 
     public override Action<ItemSource> DrawTooltip => source =>
     {
         var asSource = AsSource(source);
-        ImGui.Text($"Item Required: {asSource.CostItem?.NameString ?? "Unknown Item"}");
-        ImGui.Text($"Amount Required: {asSource.InspectionData.AmountRequired}");
+        ImGui.Text($"所需物品： {asSource.CostItem?.NameString ?? "未知物品"}");
+        ImGui.Text($"所需数量： {asSource.InspectionData.AmountRequired}");
     };
 
     public override Func<ItemSource, string> GetName => source =>

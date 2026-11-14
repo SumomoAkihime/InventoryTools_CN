@@ -58,12 +58,14 @@ public class CraftSettingsColumn : IColumn
     public ColumnCategory ColumnCategory => ColumnCategory.Crafting;
 
 
-    public string Name { get; set; } = "Settings";
+    public string Name { get; set; } = "设置";
+    [Newtonsoft.Json.JsonIgnore]
+    public string ExportName => "Settings";
     public float Width { get; set; } = 120;
-    public string HelpText { get; set; } = "Modify each items craft settings in this column";
+    public string HelpText { get; set; } = "在此列调整各物品的制作设置";
     public string FilterText { get; set; } = "";
 
-    public string RenderName { get; } = "Settings";
+    public string RenderName { get; } = "设置";
     public virtual bool HideHeaderLabel => true;
     public List<string>? FilterChoices { get; set; } = null;
     public bool HasFilter { get; set; } = false;
@@ -110,7 +112,7 @@ public class CraftSettingsColumn : IColumn
         {
             if (popup.Success)
             {
-                ImGui.Text("Configure Sourcing:");
+                ImGui.Text("配置来源：");
                 ImGui.Separator();
 
                 DrawRecipeSelector(configuration, searchResult.CraftItem, rowIndex);
@@ -127,7 +129,7 @@ public class CraftSettingsColumn : IColumn
         {
             if (popup.Success)
             {
-                ImGui.Text("Configure Recipe:");
+                ImGui.Text("配置配方：");
                 ImGui.Separator();
                 if (DrawRecipeSelector(configuration, searchResult.CraftItem, rowIndex))
                 {
@@ -140,7 +142,7 @@ public class CraftSettingsColumn : IColumn
         {
             if (popup.Success)
             {
-                ImGui.Text("Configure HQ Required:");
+                ImGui.Text("设置 HQ 需求：");
                 ImGui.Separator();
                 if (DrawHqSelector(configuration, searchResult.CraftItem, rowIndex))
                 {
@@ -153,7 +155,7 @@ public class CraftSettingsColumn : IColumn
         {
             if (popup.Success)
             {
-                ImGui.Text("Retrieve from Retainer:");
+                ImGui.Text("从雇员处取出：");
                 ImGui.Separator();
                 if (DrawRetainerRetrievalSelector(configuration, searchResult.CraftItem, rowIndex))
                 {
@@ -166,7 +168,7 @@ public class CraftSettingsColumn : IColumn
         {
             if (popup.Success)
             {
-                ImGui.Text("Prefer Market World:");
+                ImGui.Text("首选市场服务器：");
                 ImGui.Separator();
             }
         }
@@ -175,7 +177,7 @@ public class CraftSettingsColumn : IColumn
         {
             if (popup.Success)
             {
-                ImGui.Text("Market Price:");
+                ImGui.Text("市场价格：");
                 ImGui.Separator();
             }
         }
@@ -205,13 +207,13 @@ public class CraftSettingsColumn : IColumn
         {
             using (ImRaii.Tooltip())
             {
-                ImGui.TextUnformatted("Sourcing: " + (ingredientPreferenceDefault != null ? _ingredientPreferenceLocalizer.FormattedName(ingredientPreferenceDefault) : "Use Default"));
-                ImGui.TextUnformatted("Retainer: " + (perItemRetainerRetrieval?.FormattedName() ?? "Use Default"));
-                ImGui.TextUnformatted("Zone: " + (zonePreference != null ? _mapSheet.GetRowOrDefault(zonePreference.Value)?.FormattedName ?? "Use Default" : "Use Default"));
+                ImGui.TextUnformatted("来源： " + (ingredientPreferenceDefault != null ? _ingredientPreferenceLocalizer.FormattedName(ingredientPreferenceDefault) : "使用默认值"));
+                ImGui.TextUnformatted("雇员： " + (perItemRetainerRetrieval?.FormattedName() ?? "使用默认值"));
+                ImGui.TextUnformatted("区域： " + (zonePreference != null ? _mapSheet.GetRowOrDefault(zonePreference.Value)?.FormattedName ?? "使用默认值" : "使用默认值"));
                 if (searchResult.Item.CanBePlacedOnMarket)
                 {
-                    ImGui.TextUnformatted("Market World Preference: " + (worldPreference != null ? _worldSheet.GetRowOrDefault(worldPreference.Value)?.Name.ExtractText() ?? "Use Default" : "Use Default"));
-                    ImGui.TextUnformatted("Market Price Override: " + (priceOverride != null ? priceOverride.Value.ToString("N0") : "Use Default"));
+                    ImGui.TextUnformatted("市场服务器偏好： " + (worldPreference != null ? _worldSheet.GetRowOrDefault(worldPreference.Value)?.Name.ExtractText() ?? "使用默认值" : "使用默认值"));
+                    ImGui.TextUnformatted("市场价格覆盖： " + (priceOverride != null ? priceOverride.Value.ToString("N0") : "使用默认值"));
                 }
             }
         }
@@ -234,9 +236,9 @@ public class CraftSettingsColumn : IColumn
             {
                 using (ImRaii.Tooltip())
                 {
-                    ImGui.Text("Retainer Retrieval: ");
+                    ImGui.Text("雇员取物： ");
                     ImGui.Separator();
-                    ImGui.Text(retainerRetrieval.FormattedName() + (perItemRetainerRetrieval == null ? " (Default)" : ""));
+                    ImGui.Text(retainerRetrieval.FormattedName() + (perItemRetainerRetrieval == null ? "（默认）" : ""));
                 }
             }
             ImGui.SameLine();
@@ -250,9 +252,9 @@ public class CraftSettingsColumn : IColumn
             {
                 using (ImRaii.Tooltip())
                 {
-                    ImGui.Text("Retainer Retrieval: ");
+                    ImGui.Text("雇员取物： ");
                     ImGui.Separator();
-                    ImGui.Text(retainerRetrieval.FormattedName() + " (Default)");
+                    ImGui.Text(retainerRetrieval.FormattedName() + "（默认）");
                 }
             }
             ImGui.SameLine();
@@ -377,31 +379,31 @@ public class CraftSettingsColumn : IColumn
         {
             using (ImRaii.Tooltip())
             {
-                ImGui.Text("Item Quality: ");
+                ImGui.Text("物品品质： ");
                 ImGui.Separator();
                 if (isCollectable)
                 {
-                    ImGui.Text("Collectable");
+                    ImGui.Text("收藏品");
                 }
                 else if (hqRequired == true)
                 {
-                    ImGui.Text("HQ Only (Overridden)");
+                    ImGui.Text("仅 HQ（覆盖设置）");
                 }
                 else if (hqRequired == false)
                 {
-                    ImGui.Text("NQ Only (Overridden)");
+                    ImGui.Text("仅 NQ（覆盖设置）");
                 }
                 else if(canBeHq)
                 {
-                    ImGui.Text(configuration.CraftList.HQRequired ? "HQ Only (List Default)" : "HQ/NQ (List Default)");
+                    ImGui.Text(configuration.CraftList.HQRequired ? "仅 HQ（列表默认）" : "HQ／NQ（列表默认）");
                 }
                 else
                 {
-                    ImGui.Text("NQ Only (List Default)");
+                    ImGui.Text("仅 NQ（列表默认）");
                 }
 
-                ImGui.Text(canBeHq ? "Can be HQ" : "Can't be HQ");
-                ImGui.Text(isCollectable ? "Always Collectable" : "Can't be Collectable");
+                ImGui.Text(canBeHq ? "可为 HQ" : "无法为 HQ");
+                ImGui.Text(isCollectable ? "始终为收藏品" : "无法为收藏品");
             }
         }
 
@@ -453,7 +455,7 @@ public class CraftSettingsColumn : IColumn
                 }
 
                 using var tt = ImRaii.Tooltip();
-                ImGui.Text($"Recipe ({itemRecipe.CraftType?.FormattedName ?? "Unknown"}): ");
+                ImGui.Text($"配方（{itemRecipe.CraftType?.FormattedName ?? "未知"}): ");
                 ImGui.Separator();
                 foreach (var ingredient in itemRecipe.IngredientCounts)
                 {
@@ -469,8 +471,8 @@ public class CraftSettingsColumn : IColumn
                 if (itemRecipes.Count > 1)
                 {
                     ImGui.NewLine();
-                    ImGui.Text("Left Click: Next Recipe");
-                    ImGui.Text("Right Click: Select Recipe");
+                    ImGui.Text("左键·下一个配方");
+                    ImGui.Text("右键·选择配方");
                 }
             }
         }
@@ -479,7 +481,7 @@ public class CraftSettingsColumn : IColumn
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.None))
             {
                 using var tt = ImRaii.Tooltip();
-                ImGui.Text($"Recipe (Company Craft): ");
+                ImGui.Text($"配方（部队合建）： ");
                 foreach (var ingredient in item.Item.CompanyCraftSequence.MaterialsRequired(item.Phase))
                 {
                     var itemId = ingredient.ItemId;
@@ -497,20 +499,20 @@ public class CraftSettingsColumn : IColumn
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.None))
             {
                 using var tt = ImRaii.Tooltip();
-                ImGui.Text($"Items: ");
+                ImGui.Text($"物品： ");
                 ImGui.Separator();
                 if (item.IngredientPreference.LinkedItemId != null && item.IngredientPreference.LinkedItemQuantity != null)
                 {
                     var itemName =
                         _itemSheet.GetRowOrDefault(item.IngredientPreference.LinkedItemId.Value)
-                            ?.NameString ?? "Unknown Item" + " : " + item.IngredientPreference.LinkedItemQuantity.Value;
+                            ?.NameString ?? "未知物品" + " : " + item.IngredientPreference.LinkedItemQuantity.Value;
                     ImGui.Text(itemName);
                     if (item.IngredientPreference.LinkedItem2Id != null &&
                         item.IngredientPreference.LinkedItem2Quantity != null)
                     {
                         var itemName2 =
                             (_itemSheet.GetRowOrDefault(item.IngredientPreference.LinkedItem2Id.Value)
-                                ?.NameString ?? "Unknown Item") + " : " +
+                                ?.NameString ?? "未知物品") + " : " +
                             item.IngredientPreference.LinkedItem2Quantity.Value;
                         ImGui.Text(itemName2);
                     }
@@ -520,7 +522,7 @@ public class CraftSettingsColumn : IColumn
                     {
                         var itemName3 =
                             (_itemSheet.GetRowOrDefault(item.IngredientPreference.LinkedItem3Id.Value)
-                                ?.NameString ?? "Unknown Item") + " : " +
+                                ?.NameString ?? "未知物品") + " : " +
                             item.IngredientPreference.LinkedItem3Quantity.Value;
                         ImGui.Text(itemName3);
                     }
@@ -542,15 +544,15 @@ public class CraftSettingsColumn : IColumn
         {
             var currentIngredientPreference =
                 configuration.CraftList.GetIngredientPreference(item);
-            var previewValue = currentIngredientPreference != null ? _ingredientPreferenceLocalizer.FormattedName(currentIngredientPreference) : "Use Default";
-            ImGui.Text("Source Preference:");
+            var previewValue = currentIngredientPreference != null ? _ingredientPreferenceLocalizer.FormattedName(currentIngredientPreference) : "使用默认值";
+            ImGui.Text("来源偏好：");
             ImGui.SameLine();
-            ImGuiService.HelpMarker("How should the item be sourced? As there are multiple ways to source an item, you can either rely on your list's ingredient sourcing (tab inside the craft list's settings) or you can override the source here.");
+            ImGuiService.HelpMarker("选择材料来源。可使用制作清单设置中的默认材料来源顺序，也可在此为单个物品覆盖来源。");
             using (var combo = ImRaii.Combo("##SetIngredients" + rowIndex, previewValue))
             {
                 if (combo.Success)
                 {
-                    if (ImGui.Selectable("Use Default"))
+                    if (ImGui.Selectable("使用默认值"))
                     {
                         configuration.CraftList.UpdateIngredientPreference(item.ItemId, null);
                         configuration.NeedsRefresh = true;
@@ -581,9 +583,9 @@ public class CraftSettingsColumn : IColumn
         {
             var priceOverride = configuration.CraftList.GetMarketItemPriceOverride(item.ItemId);
             var priceString = priceOverride?.ToString() ?? "";
-            ImGui.Text("Market Price Override:");
+            ImGui.Text("市场价格覆盖：");
             ImGui.SameLine();
-            ImGuiService.HelpMarker("Override the price for this item. This is only used when no pricing is available. Use this to give you a rough estimate of the gil cost of your item.");
+            ImGuiService.HelpMarker("覆盖物品价格。仅在无可用价格时使用，可用于粗略估计金币成本。");
             if (ImGui.InputText("##MarketPricePreference" + rowIndex, ref priceString, 50))
             {
                 if (priceString == "")
@@ -608,15 +610,15 @@ public class CraftSettingsColumn : IColumn
         {
             var worldId = configuration.CraftList.GetMarketItemWorldPreference(item.ItemId);
             var currentWorld = worldId != null ? _worldSheet.GetRowOrDefault(worldId.Value) : null;
-            var previewValue = currentWorld?.Name.ExtractText() ?? "Use Default";
-            ImGui.Text("Market World Preference:");
+            var previewValue = currentWorld?.Name.ExtractText() ?? "使用默认值";
+            ImGui.Text("市场服务器偏好：");
             ImGui.SameLine();
-            ImGuiService.HelpMarker("Override the market world preferences for this item. If you select a world here, the craft pricer will attempt to take prices from this world first then follow the normal rules for craft pricing.");
+            ImGuiService.HelpMarker("覆盖此物品的市场服务器偏好。选择服务器后，制作定价会优先查询该服务器，再按常规定价规则处理。");
             using (var combo = ImRaii.Combo("##MarketWorldPreference" + rowIndex, previewValue))
             {
                 if (combo.Success)
                 {
-                    if (ImGui.Selectable("Use Default"))
+                    if (ImGui.Selectable("使用默认值"))
                     {
                         configuration.CraftList.UpdateItemWorldPreference(item.ItemId, null);
                         configuration.NeedsRefresh = true;
@@ -650,15 +652,15 @@ public class CraftSettingsColumn : IColumn
             {
                 var mapId = configuration.CraftList.GetZonePreference(item.IngredientPreference.Type,item.ItemId);
                 var currentMap = mapId != null ? _mapSheet.GetRow(mapId.Value) : null;
-                var previewValue = currentMap?.FormattedName ?? "Use Default";
-                ImGui.Text("Zone Preference:");
+                var previewValue = currentMap?.FormattedName ?? "使用默认值";
+                ImGui.Text("区域偏好：");
                 ImGui.SameLine();
-                ImGuiService.HelpMarker("Where should the item be sourced from? As there are sometimes multiple locations to source an item from, you can either rely on your list's zone preferences (tab inside the craft list's settings) or you can override the zone here.");
+                ImGuiService.HelpMarker("选择物品获取区域。可使用制作清单设置中的区域偏好，也可在此覆盖。");
                 using (var combo = ImRaii.Combo("##ZonePreference" + rowIndex, previewValue))
                 {
                     if (combo.Success)
                     {
-                        if (ImGui.Selectable("Use Default"))
+                        if (ImGui.Selectable("使用默认值"))
                         {
                             configuration.CraftList.UpdateZonePreference(item.IngredientPreference.Type, item.ItemId, null);
                             configuration.NeedsRefresh = true;
@@ -690,37 +692,37 @@ public class CraftSettingsColumn : IColumn
     {
         //Retrieve from retainer combo
         var craftRetainerRetrieval = configuration.CraftList.GetCraftRetainerRetrieval(item.ItemId);
-        var previewValue = "Use Default";
+        var previewValue = "使用默认值";
         if (craftRetainerRetrieval != null)
         {
             switch (craftRetainerRetrieval.Value)
             {
                 case CraftRetainerRetrieval.Yes:
-                    previewValue = "Yes";
+                    previewValue = "是";
                     break;
                 case CraftRetainerRetrieval.No:
-                    previewValue = "No";
+                    previewValue = "否";
                     break;
                 case CraftRetainerRetrieval.HqOnly:
-                    previewValue = "HQ Only";
+                    previewValue = "仅 HQ";
                     break;
                 case CraftRetainerRetrieval.NqOnly:
-                    previewValue = "NQ Only";
+                    previewValue = "仅 NQ";
                     break;
                 case CraftRetainerRetrieval.CollectableOnly:
-                    previewValue = "Collectable Only";
+                    previewValue = "仅收藏品";
                     break;
             }
         }
 
-        ImGui.Text("Retrieve from Retainer:");
+        ImGui.Text("从雇员处取出：");
         ImGui.SameLine();
-        ImGuiService.HelpMarker("Should we source the item from your retainers? If there is a quantity available of the correct quality it will show up in the Items in Retainers/Bags section.");
+        ImGuiService.HelpMarker("是否将雇员库存作为物品来源。存在符合品质的数量时，会显示在“雇员／背包中的物品”中。");
         using (var combo = ImRaii.Combo("##SetRetrieveRetainer" + rowIndex, previewValue))
         {
             if (combo.Success)
             {
-                if (ImGui.Selectable("Use Default"))
+                if (ImGui.Selectable("使用默认值"))
                 {
                     configuration.CraftList.UpdateCraftRetainerRetrieval(item.ItemId, null);
                     configuration.NeedsRefresh = true;
@@ -728,7 +730,7 @@ public class CraftSettingsColumn : IColumn
                     return true;
                 }
 
-                if (ImGui.Selectable("Yes"))
+                if (ImGui.Selectable("是"))
                 {
                     configuration.CraftList.UpdateCraftRetainerRetrieval(item.ItemId, CraftRetainerRetrieval.Yes);
                     configuration.NeedsRefresh = true;
@@ -736,7 +738,7 @@ public class CraftSettingsColumn : IColumn
                     return true;
                 }
 
-                if (ImGui.Selectable("No"))
+                if (ImGui.Selectable("否"))
                 {
                     configuration.CraftList.UpdateCraftRetainerRetrieval(item.ItemId, CraftRetainerRetrieval.No);
                     configuration.NeedsRefresh = true;
@@ -744,7 +746,7 @@ public class CraftSettingsColumn : IColumn
                     return true;
                 }
 
-                if (!item.Item.IsCollectable && item.Item.Base.CanBeHq && ImGui.Selectable("HQ Only"))
+                if (!item.Item.IsCollectable && item.Item.Base.CanBeHq && ImGui.Selectable("仅 HQ"))
                 {
                     configuration.CraftList.UpdateCraftRetainerRetrieval(item.ItemId, CraftRetainerRetrieval.HqOnly);
                     configuration.NeedsRefresh = true;
@@ -752,7 +754,7 @@ public class CraftSettingsColumn : IColumn
                     return true;
                 }
 
-                if (!item.Item.IsCollectable && ImGui.Selectable("NQ Only"))
+                if (!item.Item.IsCollectable && ImGui.Selectable("仅 NQ"))
                 {
                     configuration.CraftList.UpdateCraftRetainerRetrieval(item.ItemId, CraftRetainerRetrieval.NqOnly);
                     configuration.NeedsRefresh = true;
@@ -760,7 +762,7 @@ public class CraftSettingsColumn : IColumn
                     return true;
                 }
 
-                if (item.Item.IsCollectable && ImGui.Selectable("Collectable Only"))
+                if (item.Item.IsCollectable && ImGui.Selectable("仅收藏品"))
                 {
                     configuration.CraftList.UpdateCraftRetainerRetrieval(item.ItemId, CraftRetainerRetrieval.CollectableOnly);
                     configuration.NeedsRefresh = true;
@@ -778,20 +780,20 @@ public class CraftSettingsColumn : IColumn
         if (item.Item.Base.CanBeHq)
         {
             var currentHQRequired = configuration.CraftList.GetHQRequired(item.ItemId);
-            var previewValue = "Use Default";
+            var previewValue = "使用默认值";
             if (currentHQRequired != null)
             {
-                previewValue = currentHQRequired.Value ? "Yes" : "No";
+                previewValue = currentHQRequired.Value ? "是" : "否";
             }
 
-            ImGui.Text("HQ Required:");
+            ImGui.Text("所需 HQ：");
             ImGui.SameLine();
-            ImGuiService.HelpMarker("Should the item be HQ or NQ? For output items, the quantity needed will only reduce if you craft an item of the correct quality. For other materials this will dictate what is listed to retrieve and what counts towards the amount you need.");
+            ImGuiService.HelpMarker("物品要求为 HQ 还是 NQ。成品仅在制作出符合品质的物品后减少需求数量，其他材料则据此计算取出数量和已有数量。");
             using (var combo = ImRaii.Combo("##SetHQRequired" + rowIndex, previewValue))
             {
                 if (combo.Success)
                 {
-                    if (ImGui.Selectable("Use Default"))
+                    if (ImGui.Selectable("使用默认值"))
                     {
                         configuration.CraftList.UpdateHQRequired(item.ItemId, null);
                         configuration.NeedsRefresh = true;
@@ -799,7 +801,7 @@ public class CraftSettingsColumn : IColumn
                         return true;
                     }
 
-                    if (ImGui.Selectable("Yes"))
+                    if (ImGui.Selectable("是"))
                     {
                         configuration.CraftList.UpdateHQRequired(item.ItemId, true);
                         configuration.NeedsRefresh = true;
@@ -807,7 +809,7 @@ public class CraftSettingsColumn : IColumn
                         return true;
                     }
 
-                    if (ImGui.Selectable("No"))
+                    if (ImGui.Selectable("否"))
                     {
                         configuration.CraftList.UpdateHQRequired(item.ItemId, false);
                         configuration.NeedsRefresh = true;
@@ -826,9 +828,9 @@ public class CraftSettingsColumn : IColumn
         if (itemRecipes.Count > 1)
         {
             var recipeName = item.Recipe?.CraftType?.FormattedName ?? "";
-            ImGui.Text("Recipe:");
+            ImGui.Text("配方：");
             ImGui.SameLine();
-            ImGuiService.HelpMarker("Select which recipe you wish to use for this item. Some items can be crafted by multiple classes.");
+            ImGuiService.HelpMarker("选择用于此物品的配方。部分物品可由多个职业制作。");
             using (var combo = ImRaii.Combo("##SetRecipe" + rowIndex, recipeName))
             {
                 if (combo.Success)

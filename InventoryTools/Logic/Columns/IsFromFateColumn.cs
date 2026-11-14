@@ -12,9 +12,11 @@ public class IsFromFateColumn : CheckboxColumn
 
     }
 
-    public override string Name { get; set; } = "Is From Fate?";
+    public override string Name { get; set; } = "是否来自危命任务";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Is From Fate?";
     public override float Width { get; set; } = 80;
-    public override string HelpText { get; set; } = "Is this item dropped/acquired in a fate?";
+    public override string HelpText { get; set; } = "物品是否通过危命任务掉落或获得";
     public override ColumnCategory ColumnCategory { get; } = ColumnCategory.Basic;
     public override bool HasFilter { get; set; } = true;
     public override ColumnFilterType FilterType { get; set; } = ColumnFilterType.Boolean;

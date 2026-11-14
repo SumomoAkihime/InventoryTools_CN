@@ -19,13 +19,15 @@ public class GatheredByColumn : TextColumn
         var currentValue = searchResult.Item.GatheringTypes.Select(c => c.Base.Name.ExtractText()).ToList();
         if (searchResult.Item.ObtainedFishing)
         {
-            currentValue.Add("Fishing");
+            currentValue.Add("捕鱼");
         }
 
         return string.Join(",", currentValue);
     }
 
-    public override string Name { get; set; } = "Gathered By?";
+    public override string Name { get; set; } = "采集职业";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Gathered By?";
     public override float Width { get; set; } = 100;
-    public override string HelpText { get; set; } = "How is this item gathered?";
+    public override string HelpText { get; set; } = "此物品的采集方式";
 }

@@ -9,8 +9,8 @@ public class CraftOverlayRememberStateSetting : GenericBooleanSetting
 {
     public CraftOverlayRememberStateSetting(ILogger<CraftOverlayRememberStateSetting> logger,
         ImGuiService imGuiService) : base("CraftOverlayRememberState",
-        "Remember State",
-        "Should the craft overlay stay open between plugin reloads/game reloads?",
+        "记住状态",
+        "是否在插件或游戏重新加载后保持制作悬浮窗打开",
         true,
         "1.11.0.8",
         logger,

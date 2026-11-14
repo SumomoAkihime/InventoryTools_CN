@@ -34,16 +34,16 @@ namespace InventoryTools.Logic.Settings
         }
 
         public override string Key { get; set; } = "WindowFilter";
-        public override string Name { get; set; } = "Window List Highlighting";
+        public override string Name { get; set; } = "窗口列表高亮";
 
         public override string HelpText { get; set; } =
-            "This is the list that will be highlighted when any of the allagan tools windows are visible.";
+            "任意 Allagan Tools 窗口可见时使用此列表进行高亮。";
         
         public override Dictionary<string, string> Choices
         {
             get
             {
-                var filterItems = new Dictionary<string, string> {{"", "None"}};
+                var filterItems = new Dictionary<string, string> {{"", "无"}};
                 foreach (var config in _listService.Lists.Where(c => !c.CraftListDefault))
                 {
                     filterItems.Add(config.Key, config.Name);

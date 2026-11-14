@@ -84,7 +84,7 @@ public class DesynthesisSkillDeltaColumn : Column<(decimal, DesynthResult)?>
                     text = "optimal";
                     break;
                 case DesynthResult.TooLow:
-                    text =  "too low";
+                    text =  "过低";
                     break;
                 case DesynthResult.Max:
                     text =  "max";
@@ -119,15 +119,15 @@ public class DesynthesisSkillDeltaColumn : Column<(decimal, DesynthResult)?>
             switch (currentValue.Value.Item2)
             {
                 case DesynthResult.Optimal:
-                    text = "Optimal";
+                    text = "最优";
                     color = ImGuiColors.HealerGreen;
                     break;
                 case DesynthResult.TooLow:
-                    text =  "Too Low";
+                    text =  "过低";
                     color = ImGuiColors.DalamudYellow;
                     break;
                 case DesynthResult.Max:
-                    text =  "Max";
+                    text =  "最大";
                     color = ImGuiColors.DalamudRed;
                     break;
             }
@@ -159,9 +159,9 @@ public class DesynthesisSkillDeltaColumn : Column<(decimal, DesynthResult)?>
 
         var text = currentValue.Value.Item2 switch
         {
-            DesynthResult.Optimal => "Optimal",
-            DesynthResult.TooLow => "Too Low",
-            DesynthResult.Max => "Max",
+            DesynthResult.Optimal => "最优",
+            DesynthResult.TooLow => "过低",
+            DesynthResult.Max => "最大",
             _ => ""
         };
 
@@ -202,10 +202,12 @@ public class DesynthesisSkillDeltaColumn : Column<(decimal, DesynthResult)?>
     }
 
 
-    public override string Name { get; set; } = "Desynthesis Skill Delta";
+    public override string Name { get; set; } = "分解技能差值";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Desynthesis Skill Delta";
     public override float Width { get; set; } = 100;
 
     public override string HelpText { get; set; } =
-        "Shows the difference between the iLvl of the item and your desynthesis skill and if desynthesis is optimal";
+        "显示物品品级与分解技能的差值，以及是否适合分解。";
 
 }

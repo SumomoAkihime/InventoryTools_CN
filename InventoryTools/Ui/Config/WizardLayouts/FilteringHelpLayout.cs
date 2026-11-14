@@ -6,16 +6,16 @@ public class FilteringHelpLayout : ContentLayout
 {
     public override PageLayout Build()
     {
-        return Page("help/filtering", "Filtering",
-            Section("Advanced search syntax",
-                Paragraph("When creating a list, or when searching through the results of a list, you can use a series of operators to make your search more specific. Which operators are available depends on what you are searching against."),
-                Bullet("!  - results that do not contain what is entered - text and numbers."),
-                Bullet("<  - results with a value less than what is entered - numbers."),
-                Bullet(">  - results with a value greater than what is entered - numbers."),
-                Bullet(">= - results with a value greater than or equal to what is entered - numbers."),
-                Bullet("<= - results with a value less than or equal to what is entered - numbers."),
-                Bullet("=  - results with a value exactly equal to what is entered - text and numbers."),
-                Bullet("&& and || - AND and OR respectively, used to chain operators together."))
+        return Page("help/filtering", "筛选",
+            Section("高级搜索语法",
+                Paragraph("创建列表或搜索列表结果时，可使用运算符细化条件。可用运算符取决于搜索字段。"),
+                Bullet("! · 匹配不包含输入内容的结果，支持文本和数字。"),
+                Bullet("< · 匹配小于输入值的数字结果。"),
+                Bullet("> · 匹配大于输入值的数字结果。"),
+                Bullet(">= · 匹配大于或等于输入值的数字结果。"),
+                Bullet("<= · 匹配小于或等于输入值的数字结果。"),
+                Bullet("= · 精确匹配输入内容，支持文本和数字。"),
+                Bullet("&& 和 || 分别表示“且”和“或”，用于组合条件。"))
         );
     }
 }

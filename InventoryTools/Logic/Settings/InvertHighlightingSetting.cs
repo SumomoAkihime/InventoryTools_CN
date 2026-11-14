@@ -18,10 +18,10 @@ namespace InventoryTools.Logic.Settings
         }
 
         public override string Key { get; set; } = "InvertHighlighting";
-        public override string Name { get; set; } = "Invert Highlighting?";
+        public override string Name { get; set; } = "反转高亮";
 
         public override string HelpText { get; set; } =
-            "Should all the items not matching a list be highlighted instead? This can be overridden in the list configuration.";
+            "是否改为高亮不匹配列表的物品，可在列表配置中覆盖";
         
         public override string Version => "1.7.0.0";
 

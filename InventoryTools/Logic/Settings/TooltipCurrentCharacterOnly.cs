@@ -19,10 +19,10 @@ namespace InventoryTools.Logic.Settings
         }
 
         public override string Key { get; set; } = "TooltipCurrentCharacter";
-        public override string Name { get; set; } = "Limit to items on the current character?";
+        public override string Name { get; set; } = "仅限当前角色持有的物品";
 
         public override string HelpText { get; set; } =
-            "Limits the information displayed on the tooltip to inventories belonging to the currently logged in character.";
+            "将物品提示信息限定为当前角色关联的库存。";
         
         public override string Version => "1.7.0.0";
 

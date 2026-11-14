@@ -19,10 +19,10 @@ namespace InventoryTools.Logic.Settings
         }
 
         public override string Key { get; set; } = "TooltipDisplayMBAverage";
-        public override string Name { get; set; } = "Add Market Average NQ/HQ Price";
+        public override string Name { get; set; } = "添加市场平均价格 NQ／HQ";
 
         public override string HelpText { get; set; } =
-            "When hovering an item, should the tooltip contain the average market price for both NQ and HQ. Please make sure 'Automatically download prices' is enabled.";
+            "是否在物品提示中显示 NQ 和 HQ 平均市场价格，需要启用“自动下载价格”";
         
         public override string Version => "1.7.0.0";
         

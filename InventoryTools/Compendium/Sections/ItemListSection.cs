@@ -56,11 +56,11 @@ public class ItemListSection : ViewSection
 
     public override Action<SectionState>? DrawOptions => (sectionState) =>
     {
-        if (ImGui.Selectable("Compact View"))
+        if (ImGui.Selectable("紧凑视图"))
         {
             sectionState.Set(sectionModeId, ItemListSectionMode.Grid);
         }
-        if (ImGui.Selectable("List View"))
+        if (ImGui.Selectable("列表视图"))
         {
             sectionState.Set(sectionModeId, ItemListSectionMode.List);
         }
@@ -77,7 +77,7 @@ public class ItemListSection : ViewSection
         var paddedIconSize = (iconSize * ImGui.GetIO().FontGlobalScale) + ImGui.GetStyle().FramePadding.X * 2;
         if (GetSectionMode(sectionState) == ItemListSectionMode.Grid)
         {
-            _imGuiService.WrapElements(_options.SectionName + "Items", _options.Items, paddedIconSize, ImGui.GetStyle().ItemSpacing.X, item =>
+            _imGuiService.WrapElements(_options.SectionName + "物品", _options.Items, paddedIconSize, ImGui.GetStyle().ItemSpacing.X, item =>
             {
                 if (ImGui.ImageButton(
                         _textureProvider.GetFromGameIcon(new GameIconLookup(item.ItemRow.Icon)).GetWrapOrEmpty()

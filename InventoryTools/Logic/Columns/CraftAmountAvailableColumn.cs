@@ -60,13 +60,15 @@ namespace InventoryTools.Logic.Columns
             return null;
         }
 
-        public override string Name { get; set; } = "Amount to Retrieve";
-        public override string RenderName => "Retrieve";
+        public override string Name { get; set; } = "取出数量";
+        [Newtonsoft.Json.JsonIgnore]
+        public override string ExportName => "Amount to Retrieve";
+        public override string RenderName => "取出";
         public override float Width { get; set; } = 60;
         public override bool? CraftOnly => false;
 
         public override string HelpText { get; set; } =
-            "This is the amount to retrieve from retainers.";
+            "需要从雇员处取出的数量。";
         public override FilterType AvailableIn { get; } = Logic.FilterType.CraftFilter | Logic.FilterType.SortingFilter;
         public override bool HasFilter { get; set; } = false;
         public override ColumnFilterType FilterType { get; set; } = ColumnFilterType.Text;

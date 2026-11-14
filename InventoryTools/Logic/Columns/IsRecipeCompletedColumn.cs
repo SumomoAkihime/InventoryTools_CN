@@ -33,7 +33,9 @@ public class IsRecipeCompletedColumn : CheckboxColumn
         return searchResult.Item.Recipes.All(c => _questManagerService.IsRecipeComplete(c.RowId));
     }
 
-    public override string Name { get; set; } = "Are Recipes Completed?";
+    public override string Name { get; set; } = "配方是否已完成";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Are Recipes Completed?";
     public override float Width { get; set; } = 100;
-    public override string HelpText { get; set; } = "Have the recipes that make this item been completed?";
+    public override string HelpText { get; set; } = "制作此物品的配方是否已完成";
 }

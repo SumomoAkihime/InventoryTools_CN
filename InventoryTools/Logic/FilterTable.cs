@@ -102,11 +102,11 @@ namespace InventoryTools.Logic
 
                 if (currentItem == "true")
                 {
-                    currentItem = "Yes";
+                    currentItem = "是";
                 }
                 else if(currentItem == "false")
                 {
-                    currentItem = "No";
+                    currentItem = "否";
                 }
                 ImGui.SetNextItemWidth(inputWidth);
                 using (var combo = ImRaii.Combo("##Choice", currentItem))
@@ -121,13 +121,13 @@ namespace InventoryTools.Logic
 
 
 
-                        if (ImGui.Selectable("Yes", currentItem == "Yes"))
+                        if (ImGui.Selectable("是", currentItem == "是"))
                         {
                             columnConfiguration.FilterText = "true";
                             hasChanged = true;
                         }
 
-                        if (ImGui.Selectable("No", currentItem == "No"))
+                        if (ImGui.Selectable("否", currentItem == "否"))
                         {
                             columnConfiguration.FilterText = "false";
                             hasChanged = true;
@@ -180,8 +180,8 @@ namespace InventoryTools.Logic
                             color.Pop();
                             using (ImRaii.Tooltip())
                             {
-                                ImGui.Text("Extra Filters");
-                                ImGui.Text("Right Click: Clear All");
+                                ImGui.Text("附加筛选器");
+                                ImGui.Text("右键·全部清空");
                             }
                         }
                     }
@@ -482,7 +482,7 @@ namespace InventoryTools.Logic
             {
                 foreach (var column in Columns)
                 {
-                    csv.WriteField(column.ExportName ?? column.Column.Name);
+                    csv.WriteField(column.ExportName ?? column.Column.ExportName);
                 }
                 csv.NextRecord();
                 foreach (var item in RenderSearchResults)
@@ -511,7 +511,7 @@ namespace InventoryTools.Logic
                 newLine["id"] = item.Item.RowId;
                 foreach (var column in Columns)
                 {
-                    newLine[column.Column.Name.ToLower()] = column.Column.JsonExport(column, item) ?? "";
+                    newLine[column.Column.ExportName.ToLower()] = column.Column.JsonExport(column, item) ?? "";
                 }
                 lines.Add(newLine);
             }

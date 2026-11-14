@@ -10,10 +10,10 @@ namespace InventoryTools.Logic.Filters
     public class FilterORFilter : BooleanFilter
     {
         public override string Key { get; set; } = "ORFilter";
-        public override string Name { get; set; } = "Use OR when filtering items.";
+        public override string Name { get; set; } = "筛选物品时使用“或”逻辑。";
 
         public override string HelpText { get; set; } =
-            "When filtering items each filter set will narrow down the list of available items using AND, instead of using AND, use OR";
+            "多个物品筛选条件默认使用“且”逻辑，此项可改为“或”逻辑";
 
         public override FilterCategory FilterCategory { get; set; } = FilterCategory.Advanced;
 

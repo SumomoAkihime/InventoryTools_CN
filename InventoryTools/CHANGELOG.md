@@ -8,6 +8,17 @@ Instead the changelog reader and automation surrounding plugin PRs will add the 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.html).
 
+## [15.1.101] - 2026-11-14
+
+### Fixed
+- 适配国服库存扫描特征码，修复雇员与部队仓库数据可能缺失或停留在旧缓存的问题。
+
+### Changed
+- 中文化界面、设置、筛选器、图鉴、物品提示、向导和命令帮助。
+- 保留已有配置、旧英文图鉴命令参数与导出字段兼容。
+- 陆行鸟染色界面的水果名称从游戏物品表读取。
+- 作者署名追加 Sumomo，插件显示名称保持 Allagan Tools。
+
 ## [15.1.1] - 2026-11-12
 
 ### Added

@@ -21,22 +21,22 @@ public class ListServiceDebuggerPane : IDebugPane
         _mediatorService = mediatorService;
     }
 
-    public string Name => "List Service";
+    public string Name => "列表服务";
 
     public void Draw()
     {
         var activeBackgroundList = ListService.GetActiveBackgroundList();
         var activeUiList = ListService.GetActiveUiList(false);
         var lists = ListService.Lists;
-        ImGui.Text($"Active Background List: {(activeBackgroundList == null ? "No List" : activeBackgroundList.Name)}");
-        ImGui.Text($"Active UI List: {(activeUiList == null ? "No List" : activeUiList.Name)}");
+        ImGui.Text($"当前后台列表：{(activeBackgroundList == null ? "无列表" : activeBackgroundList.Name)}");
+        ImGui.Text($"当前界面列表：{(activeUiList == null ? "无列表" : activeUiList.Name)}");
         foreach (var list in lists)
         {
             using var id = ImRaii.PushId(list.Key);
             ImGui.Text($"{list.Name}:");
-            ImGui.Text($"{(list.Active ? "Active" : "Not Active")}");
+            ImGui.Text($"{(list.Active ? "已激活" : "未激活")}");
             ImGui.SameLine();
-            if (ImGui.Button("Request Refresh"))
+            if (ImGui.Button("请求刷新"))
             {
                 _mediatorService.Publish(new RequestListUpdateMessage(list));
             }

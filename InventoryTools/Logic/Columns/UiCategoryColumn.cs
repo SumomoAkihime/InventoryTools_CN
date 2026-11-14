@@ -22,10 +22,12 @@ namespace InventoryTools.Logic.Columns
             return itemItemUiCategory?.Name.ExtractText() ?? "";
         }
 
-        public override string Name { get; set; } = "Category (Basic)";
-        public override string RenderName => "Category";
+        public override string Name { get; set; } = "类别（基础）";
+        [Newtonsoft.Json.JsonIgnore]
+        public override string ExportName => "Category (Basic)";
+        public override string RenderName => "类别";
         public override float Width { get; set; } = 200.0f;
-        public override string HelpText { get; set; } = "The category of the item.";
+        public override string HelpText { get; set; } = "物品的类别。";
         public override bool HasFilter { get; set; } = true;
         public override ColumnFilterType FilterType { get; set; } = ColumnFilterType.Text;
         public override FilterType DefaultIn => Logic.FilterType.GameItemFilter;

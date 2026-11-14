@@ -23,7 +23,7 @@ public class CharacterDebuggerPane : DebugLogPane
         _clientState = clientState;
         _configuration = configuration;
     }
-    public override string Name => "Character Monitor";
+    public override string Name => "角色监视器";
 
     public override void SubscribeToEvents()
     {

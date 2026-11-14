@@ -10,10 +10,10 @@ namespace InventoryTools.Logic.Filters;
 public class IgnoreHQFilter : BooleanFilter
 {
     public override string Key { get; set; } = "IgnoreHQFilter";
-    public override string Name { get; set; } = "Ignore HQ Filter?";
+    public override string Name { get; set; } = "忽略 HQ 筛选器";
 
     public override string HelpText { get; set; } =
-        "When sorting should the filter consider HQ and NQ items to be the same when attempting to stack them? This primary use for this filter is to find items that can have their quality lowered.";
+        "整理堆叠时是否将 HQ 和 NQ 视为相同物品，主要用于查找可降低品质后合并的物品。";
 
     public override FilterCategory FilterCategory { get; set; } = FilterCategory.Advanced;
     public override FilterType AvailableIn { get; set; } = FilterType.SortingFilter;

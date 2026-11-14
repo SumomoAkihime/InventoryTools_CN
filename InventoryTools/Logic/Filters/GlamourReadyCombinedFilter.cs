@@ -9,8 +9,8 @@ namespace InventoryTools.Logic.Filters;
 
 public class GlamourReadyCombinedFilter : GenericBooleanFilter
 {
-    public GlamourReadyCombinedFilter(ILogger<GlamourReadyCombinedFilter> logger, ImGuiService imGuiService) : base("grCombined", "Outfit Glamour Combined",
-        "Is the item combined in the glamour chest?", FilterCategory.Basic,
+    public GlamourReadyCombinedFilter(ILogger<GlamourReadyCombinedFilter> logger, ImGuiService imGuiService) : base("grCombined", "组合投影合并物品",
+        "物品是否已在投影台合并", FilterCategory.Basic,
         item => item.SortedCategory == InventoryCategory.GlamourChest && item.GlamourId != 0, null, logger, imGuiService)
     {
     }

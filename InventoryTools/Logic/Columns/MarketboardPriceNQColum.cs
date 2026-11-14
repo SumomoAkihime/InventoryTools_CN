@@ -24,8 +24,8 @@ namespace InventoryTools.Logic.Columns
             _marketCache = marketCache;
         }
         public override ColumnCategory ColumnCategory => ColumnCategory.Market;
-        protected readonly string LoadingString = "loading...";
-        protected readonly string UntradableString = "untradable";
+        protected readonly string LoadingString = "加载中…";
+        protected readonly string UntradableString = "禁止交易";
         protected readonly int Loading = -1;
         protected readonly int Untradable = -2;
 
@@ -98,10 +98,12 @@ namespace InventoryTools.Logic.Columns
 
             return Loading;
         }
-        public override string Name { get; set; } = "Market Board Average Price NQ";
-        public override string RenderName => "MB Avg. Price NQ";
+        public override string Name { get; set; } = "市场平均价格 NQ";
+        [Newtonsoft.Json.JsonIgnore]
+        public override string ExportName => "Market Board Average Price NQ";
+        public override string RenderName => "市场均价 NQ";
         public override string HelpText { get; set; } =
-            "Shows the average price of the NQ form of the item. If no world is selected, your home world is used. This data is sourced from universalis.";
+            "显示 NQ 平均价格。未选择服务器时使用所属服务器，数据来自 Universalis。";
         public override float Width { get; set; } = 250.0f;
         public override bool HasFilter { get; set; } = true;
         public override ColumnFilterType FilterType { get; set; } = ColumnFilterType.Text;

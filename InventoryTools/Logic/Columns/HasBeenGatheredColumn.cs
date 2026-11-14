@@ -21,12 +21,14 @@ public class HasBeenGatheredColumn : CheckboxColumn
         return _gameInterface.IsItemGathered(searchResult.Item.RowId);
     }
 
-    public override string Name { get; set; } = "Logged in Gathering Log?";
-    public override string RenderName => "Logged?";
+    public override string Name { get; set; } = "是否已记录于采集笔记";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Logged in Gathering Log?";
+    public override string RenderName => "记录状态";
     public override float Width { get; set; } = 80;
 
     public override string HelpText { get; set; } =
-        "Has this gathering item been gathered at least once by the currently logged in character? This only supports mining and botany at present.";
+        "当前角色是否曾采集此物品至少一次？目前仅支持采矿工和园艺工。";
 
     public override bool HasFilter { get; set; } = true;
     public override ColumnFilterType FilterType { get; set; } = ColumnFilterType.Boolean;

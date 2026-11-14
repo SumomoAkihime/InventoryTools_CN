@@ -23,6 +23,65 @@ namespace InventoryTools.Commands
 {
     public class PluginCommands
     {
+        private static readonly Dictionary<string, string> CompendiumCommandAliases = new(StringComparer.OrdinalIgnoreCase)
+        {
+            ["Achievement"] = "achievements",
+            ["Achievements"] = "achievements",
+            ["Airship Route"] = "airships",
+            ["Airship Routes"] = "airships",
+            ["Allied Societies"] = "beast_tribes",
+            ["Allied Society"] = "beast_tribes",
+            ["BGM"] = "bgm",
+            ["Chocobo Item"] = "chocoboItems",
+            ["Chocobo Items"] = "chocoboItems",
+            ["Class"] = "classes",
+            ["Classes"] = "classes",
+            ["Coffer"] = "coffers",
+            ["Coffers"] = "coffers",
+            ["Craft Soul Crystal"] = "craft_soul_crystals",
+            ["Craft Soul Crystals"] = "craft_soul_crystals",
+            ["Custom Deliveries"] = "satisfaction_npc",
+            ["Custom Delivery"] = "satisfaction_npc",
+            ["Familiar"] = "familiars",
+            ["Familiars"] = "familiars",
+            ["Folklore Tome"] = "folklore_tomes",
+            ["Folklore Tomes"] = "folklore_tomes",
+            ["Gearset"] = "gearsets",
+            ["Gearsets"] = "gearsets",
+            ["Instance"] = "instance",
+            ["Instances"] = "instance",
+            ["Item"] = "items",
+            ["Items"] = "items",
+            ["Job Soul Crystal"] = "job_soul_crystals",
+            ["Job Soul Crystals"] = "job_soul_crystals",
+            ["Leve"] = "leves",
+            ["Leves"] = "leves",
+            ["Master Recipe Book"] = "secret_recipe_books",
+            ["Master Recipe Books"] = "secret_recipe_books",
+            ["Minion"] = "minions",
+            ["Minions"] = "minions",
+            ["Mob"] = "mobs",
+            ["Mobs"] = "mobs",
+            ["Mount"] = "mounts",
+            ["Mounts"] = "mounts",
+            ["NPC"] = "npcs",
+            ["NPCs"] = "npcs",
+            ["Quest"] = "quest",
+            ["Quests"] = "quest",
+            ["Racing Chocobo Item"] = "racingChocoboItems",
+            ["Racing Chocobo Items"] = "racingChocoboItems",
+            ["Relic Tool"] = "relic_tools",
+            ["Relic Tools"] = "relic_tools",
+            ["Relic Weapon"] = "relic_weapons",
+            ["Relic Weapons"] = "relic_weapons",
+            ["Shared Model Set"] = "shared_models",
+            ["Shared Model Sets"] = "shared_models",
+            ["Submarine Route"] = "submarines",
+            ["Submarine Routes"] = "submarines",
+            ["Territories"] = "territories",
+            ["Territory"] = "territories",
+        };
+
         public ILogger<PluginCommands> Logger { get; }
         private readonly MediatorService _mediatorService;
         private readonly IChatUtilities _chatUtilities;
@@ -42,27 +101,27 @@ namespace InventoryTools.Commands
 
         [Command("/allagantools")]
         [Aliases("/atools")]
-        [HelpMessage("Shows the allagan tools items list window.")]
+        [HelpMessage("显示 Allagan Tools 物品列表窗口。")]
         public void ShowHideInventoryToolsCommand(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(FiltersWindow)));
         }
         [Command("/duties")]
         [Aliases("/atduties")]
-        [HelpMessage("Shows the allagan tools duties window.")]
+        [HelpMessage("显示 Allagan Tools 副本窗口。")]
         public void ShowHideDutiesWindow(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(DutiesWindow)));
         }
         [Command("/mobs")]
         [Aliases("/atmobs")]
-        [HelpMessage("Shows the allagan tools mobs compendium.")]
+        [HelpMessage("显示 Allagan Tools 怪物图鉴。")]
         public void ShowHideMobsWindow(string command, string args)
         {
             _mediatorService.Publish(new ToggleCompendiumListByTypeMessage(typeof(InventoryTools.Compendium.Types.BNpcCompendiumType)));
         }
         [Command("/atnpcs")]
-        [HelpMessage("Shows the allagan tools npcs window.")]
+        [HelpMessage("显示 Allagan Tools NPC 窗口。")]
         public void ShowHideNpcsWindow(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(ENpcsWindow)));
@@ -70,7 +129,7 @@ namespace InventoryTools.Commands
 
         [Command("/compendium")]
         [Aliases("/atc")]
-        [HelpMessage("Shows the allagan tools compendium window.")]
+        [HelpMessage("显示 Allagan Tools 图鉴窗口。")]
         public void ShowCompendiumWindow(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(CompendiumTypesWindow)));
@@ -78,27 +137,29 @@ namespace InventoryTools.Commands
 
         [Command("/compendiumlist")]
         [Aliases("/atclt")]
-        [HelpMessage("Toggle a specific compendium list window.")]
+        [HelpMessage("切换指定图鉴列表窗口。")]
         public void ToggleCompendiumListWindow(string command, string args)
         {
             if (args == string.Empty)
             {
-                var message = "Please enter the name of a compendium type, the following are available:\n";
+                var message = "请输入图鉴类型，可用类型如下。\n";
                 message += string.Join("\n", _compendiumTypes.Where(c => c.ShowInListing).Select(c => c.Plural));
                 _chatUtilities.Print(message);
             }
             else
             {
                 var name = args.ToLowerInvariant();
+                CompendiumCommandAliases.TryGetValue(name, out var legacyKey);
                 var compendiumType = _compendiumTypes.FirstOrDefault(c =>
-                    c.Singular.ToLowerInvariant() == name || c.Plural.ToLowerInvariant() == name);
+                    c.Singular.ToLowerInvariant() == name || c.Plural.ToLowerInvariant() == name ||
+                    c.Key.Equals(name, StringComparison.OrdinalIgnoreCase) || c.Key == legacyKey);
                 if (compendiumType != null)
                 {
                     _mediatorService.Publish(new ToggleCompendiumListMessage(compendiumType));
                 }
                 else
                 {
-                    _chatUtilities.PrintError(args + " is not a valid compendium type.");
+                    _chatUtilities.PrintError(args + "不是有效的图鉴类型。");
                 }
             }
         }
@@ -106,14 +167,14 @@ namespace InventoryTools.Commands
 
         [Command("/athighlight")]
         [Aliases("/atf")]
-        [HelpMessage("Toggles the specified list's highlight on/off, turning off any other highlighting in the process.")]
+        [HelpMessage("切换指定列表的高亮，同时关闭其他高亮。")]
         public  void FilterToggleCommand(string command, string args)
         {
             Logger.LogTrace(command);
             Logger.LogTrace(args);
             if (args.Trim() == "")
             {
-                _chatUtilities.PrintError("You must enter the name of an list.");
+                _chatUtilities.PrintError("请输入列表名称。");
             }
             else
             {
@@ -122,12 +183,12 @@ namespace InventoryTools.Commands
         }
 
         [Command("/openlist")]
-        [HelpMessage("Open/closes a window displaying the contents of a single list.")]
+        [HelpMessage("打开或关闭单个列表的内容窗口。")]
         public  void OpenFilterCommand(string command, string args)
         {
             if (args.Trim() == "")
             {
-                _chatUtilities.PrintError("You must enter the name of a list.");
+                _chatUtilities.PrintError("请输入列表名称。");
             }
             else
             {
@@ -138,62 +199,62 @@ namespace InventoryTools.Commands
                 }
                 else
                 {
-                    _chatUtilities.PrintError("Could not find a list with that name.");
+                    _chatUtilities.PrintError("找不到此名称的列表。");
                 }
             }
         }
 
         [Command("/crafts")]
-        [HelpMessage("Opens the allagan tools crafts window")]
+        [HelpMessage("打开 Allagan Tools 制作窗口")]
         public  void OpenCraftsWindow(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(CraftsWindow)));
         }
 
         [Command("/airships")]
-        [HelpMessage("Opens the allagan tools airships window")]
+        [HelpMessage("打开 Allagan Tools 飞空艇窗口")]
         public  void ToggleAirshipsWindow(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(AirshipsWindow)));
         }
 
         [Command("/submarines")]
-        [HelpMessage("Opens the allagan tools submarines window")]
+        [HelpMessage("打开 Allagan Tools 潜水艇窗口")]
         public  void ToggleSubmarinesWindow(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(SubmarinesWindow)));
         }
 
         [Command("/retainerventures")]
-        [HelpMessage("Opens the allagan tools retainer ventures window")]
+        [HelpMessage("打开 Allagan Tools 雇员探险窗口")]
         public  void ToggleToggleRetainerTasksWindow(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(RetainerTasksWindow)));
         }
 
         [Command("/atconfig")]
-        [HelpMessage("Opens the allagan tools configuration window")]
+        [HelpMessage("打开 Allagan Tools 设置窗口")]
         public  void OpenConfigurationWindow(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(ConfigurationWindow)));
         }
 
         [Command("/athelp")]
-        [HelpMessage("Opens the allagan tools help window")]
+        [HelpMessage("打开 Allagan Tools 帮助窗口")]
         public void OpenHelpWindow(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(HelpWindow)));
         }
 
         [Command("/atdebug")]
-        [HelpMessage("Opens the allagan tools debug window")]
+        [HelpMessage("打开 Allagan Tools 调试窗口")]
         public void ToggleDebugWindow(string command, string args)
         {
             _mediatorService.Publish(new ToggleDalamudWindowMessage(typeof(AllaganDebugWindow)));
         }
 
         [Command("/atclearhighlights", "/atclearfilter")]
-        [HelpMessage("Clears the currently active highlighting. Pass in background or ui to turn off highlighting for the background and ui highlighting respectively.")]
+        [HelpMessage("清除当前高亮。传入 background 或 ui 可分别关闭后台或界面高亮。")]
         public void ClearFilter(string command, string args)
         {
             args = args.Trim();
@@ -213,14 +274,14 @@ namespace InventoryTools.Commands
         }
 
         [Command("/atcloselists", "/atclosefilters")]
-        [HelpMessage("Closes all list windows.")]
+        [HelpMessage("关闭全部列表窗口。")]
         public void CloseFilterWindows(string command, string args)
         {
             _mediatorService.Publish(new CloseWindowsByTypeMessage(typeof(FilterWindow)));
         }
 
         [Command("/atclearall")]
-        [HelpMessage("Closes all list windows and clears all active highlighting. Pass in background or ui to close just the background or ui highlighting respectively.")]
+        [HelpMessage("关闭全部列表窗口并清除全部高亮。传入 background 或 ui 可分别关闭后台或界面高亮。")]
         public void ClearAll(string command, string args)
         {
             ClearFilter(command, args);
@@ -228,14 +289,14 @@ namespace InventoryTools.Commands
         }
 
         [Command("/craftoverlay")]
-        [HelpMessage("Toggles the crafting overlay window.")]
+        [HelpMessage("切换制作悬浮窗。")]
         public void CraftOverlay(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(CraftOverlayWindow)));
         }
 
         [Command("/atrecommend", "/atr")]
-        [HelpMessage("Toggles the equipment recommendation window.")]
+        [HelpMessage("切换装备推荐窗口。")]
         public void EquipmentRecommendation(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(EquipmentSuggestWindow)));
@@ -243,7 +304,7 @@ namespace InventoryTools.Commands
 
         [Command("/chocobocolour")]
         [Aliases("/atcc")]
-        [HelpMessage("Toggles the chocobo colour calculator window.")]
+        [HelpMessage("切换陆行鸟染色计算器窗口。")]
         public void ToggleChocoboColourWindow(string command, string args)
         {
             _mediatorService.Publish(new ToggleGenericWindowMessage(typeof(ChocoboColourWindow)));
@@ -251,7 +312,7 @@ namespace InventoryTools.Commands
 
         [Command("/moreinfo")]
         [Aliases("/itemwindow")]
-        [HelpMessage("Opens the more information window for a specific item. Provide the name of the item or the ID of the item.")]
+        [HelpMessage("打开指定物品的信息窗口，可提供物品名称或 ID。")]
         public void MoreInformation(string command, string args)
         {
             args = args.Trim();
@@ -278,7 +339,7 @@ namespace InventoryTools.Commands
             }
             else
             {
-                _chatUtilities.PrintError("The item " + args + " could not be found.");
+                _chatUtilities.PrintError("物品 " + args + "未找到。");
             }
         }
 

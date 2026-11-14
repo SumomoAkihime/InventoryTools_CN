@@ -49,13 +49,15 @@ namespace InventoryTools.Logic.Columns
             return null;
         }
 
-        public override string Name { get; set; } = "Amount in Character Inventory";
-        public override string RenderName => "Inventory";
+        public override string Name { get; set; } = "角色库存中的数量";
+        [Newtonsoft.Json.JsonIgnore]
+        public override string ExportName => "Amount in Character Inventory";
+        public override string RenderName => "库存";
         public override float Width { get; set; } = 60;
         public override bool? CraftOnly => true;
         public override FilterType AvailableIn { get; } = Logic.FilterType.CraftFilter;
         public override string HelpText { get; set; } =
-            "This is the amount available within your filtered inventories available to complete the craft.";
+            "符合库存筛选条件且可用于完成制作的数量。";
         public override bool HasFilter { get; set; } = false;
         public override ColumnFilterType FilterType { get; set; } = ColumnFilterType.Text;
     }

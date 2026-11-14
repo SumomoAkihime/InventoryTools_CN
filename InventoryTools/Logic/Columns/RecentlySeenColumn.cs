@@ -19,10 +19,12 @@ namespace InventoryTools.Logic.Columns
         {
             return _pluginLogic.GetLastSeenTime(searchResult.Item.RowId)?.ToHumanReadableString() ?? "";
         }
-        public override string Name { get; set; } = "Last Seen Date/Time";
-        public override string RenderName => "Last Seen";
+        public override string Name { get; set; } = "最后发现时间";
+        [Newtonsoft.Json.JsonIgnore]
+        public override string ExportName => "Last Seen Date/Time";
+        public override string RenderName => "最后发现";
         public override float Width { get; set; } = 100;
-        public override string HelpText { get; set; } = "Displays the last time an item was seen.";
+        public override string HelpText { get; set; } = "显示最后发现物品的时间。";
         public override bool HasFilter { get; set; } = true;
         public override ColumnFilterType FilterType { get; set; } = ColumnFilterType.Text;
     }

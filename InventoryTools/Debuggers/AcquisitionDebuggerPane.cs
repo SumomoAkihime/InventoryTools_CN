@@ -16,7 +16,7 @@ public class AcquisitionDebuggerPane : DebugLogPane
         _acquisitionMonitorService = acquisitionMonitorService;
     }
 
-    public override string Name => "Item Acquisition Monitor";
+    public override string Name => "物品获取监视器";
 
     public override void SubscribeToEvents()
     {

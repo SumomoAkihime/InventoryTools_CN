@@ -14,6 +14,8 @@ public abstract class ButtonColumn : IColumn
     }
 
     public abstract string Name { get; set; }
+    [Newtonsoft.Json.JsonIgnore]
+    public virtual string ExportName => Name;
     public abstract float Width { get; set; }
     public abstract string HelpText { get; set; }
     public virtual string FilterText { get; set; } = "";

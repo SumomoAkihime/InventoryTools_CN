@@ -23,7 +23,9 @@ public class PhysicalDamageColumn : IntegerColumn
         return searchResult.Item.Base.DamagePhys;
     }
 
-    public override string Name { get; set; } = "Physical Damage";
+    public override string Name { get; set; } = "物理基本性能";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Physical Damage";
     public override float Width { get; set; } = 80;
-    public override string HelpText { get; set; } = "The physical damage of the item";
+    public override string HelpText { get; set; } = "物品的物理基本性能";
 }

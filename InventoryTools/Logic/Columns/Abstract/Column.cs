@@ -56,6 +56,8 @@ namespace InventoryTools.Logic.Columns.Abstract
         }
 
         public abstract string Name { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
+        public virtual string ExportName => Name;
         public virtual string? RenderName { get; } = null;
         public virtual FilterType DefaultIn { get; } = Logic.FilterType.None;
         public abstract float Width { get; set; }

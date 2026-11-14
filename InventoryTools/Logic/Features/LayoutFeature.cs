@@ -14,10 +14,10 @@ public class LayoutFeature : Feature
 
     public override PageLayout Build()
     {
-        return Page("feature/layout", "Layout",
-            Paragraph("The items window and the craft window can show your lists as tabs along the top, or in a side bar. A side bar is better when you have many lists. Tabs are better when you have only a few."),
+        return Page("feature/layout", "布局",
+            Paragraph("物品和制作窗口可使用顶部标签页或侧栏显示列表。列表较多时适合侧栏，较少时适合标签页。"),
             Setting<FiltersWindowLayoutSetting>("Items window"),
-            Setting<CraftWindowLayoutSetting>("Craft window")
+            Setting<CraftWindowLayoutSetting>("制作窗口")
         );
     }
 }

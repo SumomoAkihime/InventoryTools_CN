@@ -39,7 +39,7 @@ namespace InventoryTools.Services
         {
             Logger = logger;
             _pluginInterfaceService = pluginInterfaceService;
-            _saveQueue = taskQueueFactory.Invoke("Configuration Save Queue");
+            _saveQueue = taskQueueFactory.Invoke("配置保存队列");
             _minifyResolver = minifyResolver;
             _containerAwareCsvLoader = containerAwareCsvLoader;
             _framework = framework;

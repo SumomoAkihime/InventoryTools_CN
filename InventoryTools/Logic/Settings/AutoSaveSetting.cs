@@ -25,12 +25,12 @@ namespace InventoryTools.Logic.Settings
         }
 
         public override string Key { get; set; } = "AutoSave";
-        public override string Name { get; set; } = "Auto save inventories/configuration?";
+        public override string Name { get; set; } = "自动保存库存／配置";
 
-        public override string WizardName { get; } = "Auto save inventories?";
+        public override string WizardName { get; } = "自动保存库存";
 
         public override string HelpText { get; set; } =
-            "Should the inventories/configuration be automatically saved on a defined interval? While the plugin does save when the game is closed and when configurations are altered, it is not saved in cases of crashing so this attempts to alleviate this.";
+            "是否定期自动保存库存及配置。插件会在正常退出或配置变更时保存，定期保存可减少崩溃造成的数据丢失。";
         
         public override string Version => "1.7.0.0";
     }

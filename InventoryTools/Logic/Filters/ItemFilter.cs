@@ -19,10 +19,10 @@ public class ItemFilter : UintMultipleChoiceFilter
     }
 
     public override string Key { get; set; } = "ItemFilter";
-    public override string Name { get; set; } = "Name (Selector)";
+    public override string Name { get; set; } = "名称（选择器）";
 
     public override string HelpText { get; set; } =
-        "Select a list of items and the filter will only display these items. You are better served using a Curated List but this filter will still work.";
+        "选择要显示的物品。此筛选器仍可使用，也可以通过精选列表管理这些物品。";
 
     public override FilterCategory FilterCategory { get; set; } = FilterCategory.Basic;
     public override List<uint> DefaultValue { get; set; } = new();

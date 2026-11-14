@@ -16,7 +16,7 @@ public class GenericBooleanTableColumn<TData> : BooleanColumn<WindowState, TData
     private readonly Func<TData, bool?> _valueSelector;
 
     public GenericBooleanTableColumn(ImGuiService imGuiService,
-        BooleanColumnOptions<TData> columnOptions) : base(imGuiService, new ChoiceColumnFilter([("true", "Yes"), ("false", "No")]))
+        BooleanColumnOptions<TData> columnOptions) : base(imGuiService, new ChoiceColumnFilter([("true", "是"), ("false", "否")]))
     {
         Key = columnOptions.Key;
         Name = columnOptions.Name;

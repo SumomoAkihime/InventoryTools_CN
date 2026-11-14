@@ -27,9 +27,11 @@ public class ExpertDeliverySealsColumn : IntegerColumn
         return null;
     }
 
-    public override string Name { get; set; } = "Expert Delivery Reward Seal Count";
+    public override string Name { get; set; } = "筹备稀有品奖励军票数";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Expert Delivery Reward Seal Count";
     public override float Width { get; set; } = 90;
 
     public override string HelpText { get; set; } =
-        "The number of seals that are rewarded when handing this item in as an expert delivery.";
+        "将此物品交纳为筹备稀有品获得的军票数量。";
 }

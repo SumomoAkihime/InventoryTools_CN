@@ -15,7 +15,7 @@ public class InventoryMonitorDebuggerPane : IDebugPane
     {
         _inventoryMonitor = inventoryMonitor;
     }
-    public string Name => "Inventory Monitor";
+    public string Name => "库存监视器";
     public void Draw()
     {
         foreach (var character in _inventoryMonitor.Inventories)

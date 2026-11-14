@@ -81,7 +81,7 @@ public class GenericItemsTableColumn<TData> : StringColumn<WindowState, TData, M
             var messages = new  List<MessageBase>();
             var items = GetRows(item);
             var rowHeight = _rowHeightSetting.CurrentValue(_configuration);
-            _imGuiService.WrapTableColumnElements("Items" + Name, items,
+            _imGuiService.WrapTableColumnElements("物品" + Name, items,
             rowHeight * ImGui.GetIO().FontGlobalScale - ImGui.GetStyle().FramePadding.X,
             item =>
             {

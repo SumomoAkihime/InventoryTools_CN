@@ -78,7 +78,7 @@ public class ListImportExportService
         var json  = JsonConvert.SerializeObject(toExport);
         if (json == null)
         {
-            throw new Exception("Failed to serialize configuration.");
+            throw new Exception("配置序列化失败。");
         }
         var bytes = Encoding.UTF8.GetBytes(json).Prepend(CurrentVersion).ToArray();
         return bytes.ToCompressedBase64();

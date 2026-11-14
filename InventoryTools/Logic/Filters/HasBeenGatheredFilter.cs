@@ -17,8 +17,8 @@ public class HasBeenGatheredFilter : BooleanFilter
         _gameInterface = gameInterface;
     }
     public override string Key { get; set; } = "HasBeenGathered";
-    public override string Name { get; set; } = "Has been gathered before?";
-    public override string HelpText { get; set; } = "Has this gathering item been gathered at least once by the currently logged in character? This only supports mining and botany at present.";
+    public override string Name { get; set; } = "是否曾经采集";
+    public override string HelpText { get; set; } = "当前角色是否曾采集此物品至少一次？目前仅支持采矿工和园艺工。";
     public override FilterCategory FilterCategory { get; set; } = FilterCategory.Gathering;
 
     public override bool? FilterItem(FilterConfiguration configuration, InventoryItem item)

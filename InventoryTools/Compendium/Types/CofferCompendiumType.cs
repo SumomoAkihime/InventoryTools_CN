@@ -25,7 +25,7 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
 {
     private const string ColumnVersion = "15.0.14";
 
-    private const string ScopeHelpText = "Owned means unlocked, or in the inventories of the current character, their retainers, free company or housing.";
+    private const string ScopeHelpText = "“已拥有”表示已解锁，或位于当前角色及其雇员、部队、住宅的库存中。";
 
     private const byte TreasureMapFilterGroup = 18;
 
@@ -80,9 +80,9 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
         _characterMonitor.OnCharacterRemoved += CharacterRemoved;
     }
 
-    public override string Singular => "Coffer";
-    public override string Plural => "Coffers";
-    public override string Description => "What drops from coffers, card packs, etc";
+    public override string Singular => "宝箱";
+    public override string Plural => "宝箱";
+    public override string Description => "宝箱、卡包等容器的内容";
     public override string Key => "coffers";
     public override (string?, uint?) Icon => (null, 26531);
 
@@ -152,14 +152,14 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
             new CompendiumGrouping<CofferContents>()
             {
                 Key = "category",
-                Name = "Category",
+                Name = "类别",
                 GroupFunc = row => row.Category,
                 GroupMapping = category => GetCategoryName((CofferCategory)category),
             },
             new CompendiumGrouping<CofferContents>()
             {
                 Key = "type",
-                Name = "Type",
+                Name = "类型",
                 GroupFunc = row => row.SourceType,
                 GroupMapping = sourceType => GetSourceTypeName((ItemInfoType)sourceType),
             },
@@ -172,7 +172,7 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
         {
             Key = "icon",
             Name = "##Icon",
-            HelpText = "The icon of the coffer",
+            HelpText = "宝箱图标",
             Version = ColumnVersion,
             ValueSelector = GetIcon,
             CompendiumType = this,
@@ -181,8 +181,8 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
         builder.AddStringColumn(new()
         {
             Key = "name",
-            Name = "Name",
-            HelpText = "The name of the coffer",
+            Name = "名称",
+            HelpText = "宝箱名称",
             Version = ColumnVersion,
             ValueSelector = GetName,
         });
@@ -192,8 +192,8 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
             builder.AddStringColumn(new()
             {
                 Key = "category",
-                Name = "Category",
-                HelpText = "The category of container. Loot containers are sorted by the items they give.",
+                Name = "类别",
+                HelpText = "容器类别，战利品容器按其提供的物品分类。",
                 Version = ColumnVersion,
                 ValueSelector = row => GetCategoryName(row.Category),
             });
@@ -204,8 +204,8 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
             builder.AddStringColumn(new()
             {
                 Key = "type",
-                Name = "Type",
-                HelpText = "The type of container",
+                Name = "类型",
+                HelpText = "容器类型",
                 Version = ColumnVersion,
                 ValueSelector = row => GetSourceTypeName(row.SourceType),
             });
@@ -214,32 +214,32 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
         builder.AddIntegerColumn(new()
         {
             Key = "contents",
-            Name = "Contents",
-            HelpText = "The number of different items the coffer can give",
+            Name = "内容",
+            HelpText = "宝箱可能提供的不同物品数量",
             Version = ColumnVersion,
             ValueSelector = row => row.Contents.Count.ToString(),
         });
         builder.AddIntegerColumn(new()
         {
             Key = "owned",
-            Name = "Owned",
-            HelpText = "The number of items from the coffer that you own. " + ScopeHelpText,
+            Name = "已拥有",
+            HelpText = "已拥有的宝箱内容物数量。 " + ScopeHelpText,
             Version = ColumnVersion,
             ValueSelector = row => GetOwnedCount(row).ToString(),
         });
         builder.AddStringColumn(new()
         {
             Key = "completion",
-            Name = "Completion",
-            HelpText = "Owned items out of all items the coffer can give. " + ScopeHelpText,
+            Name = "完成情况",
+            HelpText = "已拥有的宝箱内容物占全部可能内容物的数量。 " + ScopeHelpText,
             Version = ColumnVersion,
             ValueSelector = GetCompletionText,
         });
         builder.AddBooleanColumn(new()
         {
             Key = "complete",
-            Name = "Complete?",
-            HelpText = "Do you own every item the coffer can give? " + ScopeHelpText,
+            Name = "是否完成",
+            HelpText = "是否已拥有此宝箱可能提供的全部物品 " + ScopeHelpText,
             Version = ColumnVersion,
             ValueSelector = row => IsComplete(row),
         });
@@ -258,20 +258,20 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
         viewBuilder.AddMetadataSection(new MetadataSectionOptions()
         {
             SectionKey = "details",
-            SectionName = "Details",
+            SectionName = "详情",
             Rows =
             [
-                new MetadataSectionOptions.Row { Label = "Category", Value = () => GetCategoryName(row.Category) },
-                new MetadataSectionOptions.Row { Label = "Type", Value = () => GetSourceTypeName(row.SourceType) },
-                new MetadataSectionOptions.Row { Label = "Contents", Value = () => row.Contents.Count.ToString() },
-                new MetadataSectionOptions.Row { Label = "Owned", Value = () => GetCompletionText(row) },
+                new MetadataSectionOptions.Row { Label = "类别", Value = () => GetCategoryName(row.Category) },
+                new MetadataSectionOptions.Row { Label = "类型", Value = () => GetSourceTypeName(row.SourceType) },
+                new MetadataSectionOptions.Row { Label = "内容", Value = () => row.Contents.Count.ToString() },
+                new MetadataSectionOptions.Row { Label = "已拥有", Value = () => GetCompletionText(row) },
             ],
         });
 
         viewBuilder.AddItemListSection(new ItemListSectionOptions()
         {
             SectionKey = "contents",
-            SectionName = "Contents",
+            SectionName = "内容",
             Items = row.Contents,
             IsOwned = IsOwned,
         });
@@ -279,14 +279,14 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
         viewBuilder.AddSingleRowRefSection(new SingleRowRefSectionOptions()
         {
             SectionKey = "coffer_item",
-            SectionName = "Coffer Item",
+            SectionName = "宝箱物品",
             RelatedRef = row.Item.Base.AsUntypedRowRef(),
         });
 
         viewBuilder.AddItemSourcesSection(new ItemSourcesSectionOptions()
         {
             SectionKey = "coffer_sources",
-            SectionName = "Coffer Sources",
+            SectionName = "宝箱来源",
             Sources = row.Item.Sources,
             SourceType = SourceType.Source,
         });
@@ -434,12 +434,12 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
         var hasAccessories = false;
         foreach (var (_, slots) in gear)
         {
-            AddSlot(armourSlots, "Head", slots.Head);
-            AddSlot(armourSlots, "Body", slots.Body);
-            AddSlot(armourSlots, "Gloves", slots.Gloves);
-            AddSlot(armourSlots, "Waist", slots.Waist);
-            AddSlot(armourSlots, "Legs", slots.Legs);
-            AddSlot(armourSlots, "Feet", slots.Feet);
+            AddSlot(armourSlots, "头部", slots.Head);
+            AddSlot(armourSlots, "身体", slots.Body);
+            AddSlot(armourSlots, "手部", slots.Gloves);
+            AddSlot(armourSlots, "腰部", slots.Waist);
+            AddSlot(armourSlots, "腿部", slots.Legs);
+            AddSlot(armourSlots, "脚部", slots.Feet);
             hasAccessories |= slots.Ears > 0 || slots.Neck > 0 || slots.Wrists > 0 || slots.FingerL > 0 || slots.FingerR > 0;
         }
 
@@ -527,19 +527,19 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
     {
         return category switch
         {
-            CofferCategory.WeaponCoffers => "Weapon Coffers",
-            CofferCategory.JobArms => "Job Arms",
-            CofferCategory.ArmourCoffers => "Armour Coffers",
-            CofferCategory.AccessoryCoffers => "Accessory Coffers",
-            CofferCategory.GearSets => "Gear Sets",
-            CofferCategory.TreasureMaps => "Treasure Maps",
-            CofferCategory.TalesOfAdventure => "Tales of Adventure",
-            CofferCategory.Miscellaneous => "Miscellaneous",
-            CofferCategory.Coffers => "Coffers",
-            CofferCategory.CardPacks => "Card Packs",
-            CofferCategory.Logograms => "Logograms",
-            CofferCategory.AncientRecords => "Ancient Records",
-            _ => "Unknown",
+            CofferCategory.WeaponCoffers => "武器箱",
+            CofferCategory.JobArms => "特职武器",
+            CofferCategory.ArmourCoffers => "装备箱",
+            CofferCategory.AccessoryCoffers => "饰品箱",
+            CofferCategory.GearSets => "套装",
+            CofferCategory.TreasureMaps => "藏宝图",
+            CofferCategory.TalesOfAdventure => "冒险录",
+            CofferCategory.Miscellaneous => "其他",
+            CofferCategory.Coffers => "宝箱",
+            CofferCategory.CardPacks => "卡包",
+            CofferCategory.Logograms => "未鉴定文理碎晶",
+            CofferCategory.AncientRecords => "古代记录",
+            _ => "未知",
         };
     }
 
@@ -547,13 +547,13 @@ public class CofferCompendiumType : CompendiumType<CofferContents>, IDisposable
     {
         return sourceType switch
         {
-            ItemInfoType.Loot => "Loot Container",
-            ItemInfoType.Coffer => "Coffer",
-            ItemInfoType.CardPack => "Card Pack",
-            ItemInfoType.Logogram => "Logogram",
-            ItemInfoType.Oizys => "Ancient Record (Oizys)",
-            ItemInfoType.Auxesia => "Ancient Record (Auxesia)",
-            _ => "Unknown",
+            ItemInfoType.Loot => "战利品容器",
+            ItemInfoType.Coffer => "宝箱",
+            ItemInfoType.CardPack => "卡包",
+            ItemInfoType.Logogram => "未鉴定文理碎晶",
+            ItemInfoType.Oizys => "古代记录（Oizys）",
+            ItemInfoType.Auxesia => "古代记录（Auxesia）",
+            _ => "未知",
         };
     }
 }

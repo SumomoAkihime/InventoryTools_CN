@@ -104,7 +104,7 @@ public class CompendiumLinkTableColumn<TData> : StringColumn<WindowState, TData,
             ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
             using (ImRaii.Tooltip())
             {
-                ImGui.TextUnformatted("Open " + link.Value.CompendiumType.Singular);
+                ImGui.TextUnformatted("打开 " + link.Value.CompendiumType.Singular);
             }
         }
 

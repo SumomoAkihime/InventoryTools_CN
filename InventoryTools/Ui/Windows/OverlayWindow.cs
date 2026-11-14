@@ -233,7 +233,7 @@ public abstract class OverlayWindow : GenericWindow, IDisposable
         }
         catch (Exception e)
         {
-            this.pluginLog.Error(e, "Failed to wrangle imgui window into position");
+            this.pluginLog.Error(e, "无法将 ImGui 窗口移动到指定位置");
         }
     }
 }

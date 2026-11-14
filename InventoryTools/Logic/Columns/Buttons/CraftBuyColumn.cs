@@ -32,9 +32,11 @@ public class CraftBuyColumn : ButtonColumn
         _chatUtilities = chatUtilities;
         _teleporterService = teleporterService;
     }
-    public override string Name { get; set; } = "Buy Button";
+    public override string Name { get; set; } = "购买按钮";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Buy Button";
     public override float Width { get; set; } = 80;
-    public override string HelpText { get; set; } = "A button/list to show you where you can buy an item";
+    public override string HelpText { get; set; } = "显示物品购买位置的按钮／列表";
     public override List<MessageBase>? Draw(FilterConfiguration configuration, ColumnConfiguration columnConfiguration,
         SearchResult searchResult, int rowIndex, int columnIndex)
     {
@@ -113,7 +115,7 @@ public class CraftBuyColumn : ButtonColumn
             ImGui.TableNextColumn();
             if (ImGui.TableGetColumnFlags().HasFlag(ImGuiTableColumnFlags.IsEnabled))
             {
-                if (ImGui.Button("Teleport##" + tuple.shop.RowId + "_" + tuple.npc.RowId + "_" +
+                if (ImGui.Button("传送##" + tuple.shop.RowId + "_" + tuple.npc.RowId + "_" +
                                  tuple.location.Map.RowId))
                 {
                     var nearestAetheryte = _teleporterService.GetNearestAetheryte(tuple.location);
@@ -140,7 +142,7 @@ public class CraftBuyColumn : ButtonColumn
         if (shops.Any())
         {
             ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 0.0f);
-            if (ImGui.Button("Buy##Buy" + rowIndex))
+            if (ImGui.Button("购买##Buy" + rowIndex))
             {
                 var vendor = GetLocations(item).FirstOrDefault();
                 if (vendor.location != null)
@@ -156,7 +158,7 @@ public class CraftBuyColumn : ButtonColumn
                 else
                 {
                     var shopName = vendor.shop.Name;
-                    _chatUtilities.Print("No location available. Shop is called " + shopName);
+                    _chatUtilities.Print("暂无位置信息。商店名称为 " + shopName);
                 }
             }
 
@@ -178,7 +180,7 @@ public class CraftBuyColumn : ButtonColumn
                                 {
                                     DrawSupplierRow(item, tuple, messages);
                                 }, ImGuiTableFlags.None,
-                                new[] { "Shop Name", "NPC", "Location", "" });
+                                new[] { "商店名称", "NPC", "位置", "" });
                         }
                     }
                 }

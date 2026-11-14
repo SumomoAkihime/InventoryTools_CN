@@ -9,8 +9,8 @@ public static class FilterCategoryExtensions
     {
         return filterCategory switch
         {
-            FilterCategory.SourceCategories => "Source (Categories)",
-            FilterCategory.UseCategories => "Use (Categories)",
+            FilterCategory.SourceCategories => "来源（类别）",
+            FilterCategory.UseCategories => "用途（类别）",
             _ => filterCategory.ToString().ToSentence()
         };
     }

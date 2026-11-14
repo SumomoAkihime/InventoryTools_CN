@@ -49,7 +49,7 @@ public class TableService : DisposableMediatorBackgroundService
         _listService.ListRefreshed += ListRefreshed;
         _itemListTables = new ConcurrentDictionary<string, FilterTable>();
         _craftItemTables = new ConcurrentDictionary<string, CraftItemTable>();
-        TableQueue = taskQueueFactory.Invoke("Table Queue", 3);
+        TableQueue = taskQueueFactory.Invoke("表格队列", 3);
         _framework.Update += OnUpdate;
         MediatorService.Subscribe<RequestTableUpdateMessage>(this, message => this.InvalidateTables(message.FilterConfiguration));
     }

@@ -20,20 +20,22 @@ public class CustomLinkButtonColumn : ButtonColumn
     public CustomLinkButtonColumn(StringColumnSetting.Factory stringColumnFactory, ICommandManager commandManager)
     {
         _commandManager = commandManager;
-        _actionSetting = stringColumnFactory.Invoke("cb_action", "Command",
-            "The web link to open. You can add the ***Name*** to output the name of the item or ***ID*** to output the name of the item in the command.",
+        _actionSetting = stringColumnFactory.Invoke("cb_action", "命令",
+            "要打开的网页链接。可使用 ***Name*** 插入物品名称，或使用 ***ID*** 插入物品 ID。",
             "", "https://site.com");
-        _buttonText = stringColumnFactory.Invoke("cb_label", "Label", "The label to give the button.","","Button");
+        _buttonText = stringColumnFactory.Invoke("cb_label", "标签", "按钮显示文字。","","按钮");
         Settings.Add(_buttonText);
         Settings.Add(_actionSetting);
     }
-    public override string Name { get; set; } = "Custom Link Button";
+    public override string Name { get; set; } = "自定义链接按钮";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Custom Link Button";
     public override float Width { get; set; } = 50;
 
     public override bool HasFilter { get; set; } = false;
 
     public override string HelpText { get; set; } =
-        "A custom button letting you open a webpage with the item's name or ID optionally embedded into the link.";
+        "打开网页的自定义按钮，可在链接中加入物品名称或 ID。";
 
     public override List<MessageBase>? Draw(FilterConfiguration configuration, ColumnConfiguration columnConfiguration, SearchResult searchResult,
         int rowIndex, int columnIndex)

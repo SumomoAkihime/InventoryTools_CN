@@ -42,13 +42,13 @@ public abstract class GenericTabbedTable<T> : GenericWindow, IGenericTabbedTable
         {
             if (tabBar.Success)
             {
-                using (var tabItem = ImRaii.TabItem("All"))
+                using (var tabItem = ImRaii.TabItem("全部"))
                 {
                     if (tabItem.Success)
                     {
                         CurrentTab = 0;
                         ImGui.PushID(0.ToString());
-                        DrawTable(TableName + "Table", GetItems(0), TableFlags, Columns, 0);
+                        DrawTable(TableName + "表格", GetItems(0), TableFlags, Columns, 0);
                         ImGui.PopID();
                     }
                 }
@@ -63,7 +63,7 @@ public abstract class GenericTabbedTable<T> : GenericWindow, IGenericTabbedTable
                             {
                                 CurrentTab = tab.Key;
                                 ImGui.PushID(tab.Key.ToString());
-                                DrawTable(tab.Key + "Table", GetItems(CurrentTab), TableFlags, Columns, CurrentTab);
+                                DrawTable(tab.Key + "表格", GetItems(CurrentTab), TableFlags, Columns, CurrentTab);
                                 ImGui.PopID();
                             }
                         }

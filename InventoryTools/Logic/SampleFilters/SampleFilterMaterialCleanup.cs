@@ -47,11 +47,11 @@ public class SampleFilterMaterialCleanup : BooleanSetting, ISampleFilter
     public override bool AppearsInConfigWindow => false;
 
     public override string Key { get; set; } = "sample3";
-    public override string Name { get; set; } = "Material clean-up";
-    public override string HelpText { get; set; } = "Finds all gatherable items in your characters inventory and attempts to show you where to put them in your retainers.";
-    public string SampleDefaultName => "100 gil or less";
+    public override string Name { get; set; } = "整理素材";
+    public override string HelpText { get; set; } = "查找角色背包中的可采集物品，并提示可放入哪些雇员库存。";
+    public string SampleDefaultName => "不超过 100 金币";
     public string SampleDescription =>
-        "This will add a list that will be setup to quickly put away any excess materials. It will have all the material categories automatically added. When calculating where to put items it will try to prioritise existing stacks of items.";
+        "添加用于快速收纳多余素材的列表，自动包含全部素材类别，并优先合并已有物品堆叠。";
     public SampleFilterType SampleFilterType => SampleFilterType.Sample;
     public override string Version => "1.7.0.0";
     public bool ShouldAdd => _shouldAdd;

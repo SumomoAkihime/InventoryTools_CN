@@ -40,8 +40,8 @@ public sealed class MetadataSection : ViewSection
             ImGuiTableFlags.PadOuterX |
             ImGuiTableFlags.NoHostExtendX);
 
-        ImGui.TableSetupColumn("Label", ImGuiTableColumnFlags.WidthFixed);
-        ImGui.TableSetupColumn("Value", ImGuiTableColumnFlags.WidthStretch);
+        ImGui.TableSetupColumn("标签", ImGuiTableColumnFlags.WidthFixed);
+        ImGui.TableSetupColumn("数值", ImGuiTableColumnFlags.WidthStretch);
 
         if (!table)
             return;

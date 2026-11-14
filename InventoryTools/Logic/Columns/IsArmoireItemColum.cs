@@ -14,10 +14,12 @@ namespace InventoryTools.Logic.Columns
         {
             return searchResult.Item.CabinetCategory != null;
         }
-        public override string Name { get; set; } = "Is Armoire Item?";
-        public override string RenderName => "Is Armoire?";
+        public override string Name { get; set; } = "是否可放入收藏柜";
+        [Newtonsoft.Json.JsonIgnore]
+        public override string ExportName => "Is Armoire Item?";
+        public override string RenderName => "是否可放入收藏柜";
         public override float Width { get; set; } = 100;
-        public override string HelpText { get; set; } = "Shows if the item belongs in the armoire.";
+        public override string HelpText { get; set; } = "显示物品是否可放入收藏柜。";
         public override bool HasFilter { get; set; } = true;
         public override ColumnFilterType FilterType { get; set; } = ColumnFilterType.Boolean;
     }

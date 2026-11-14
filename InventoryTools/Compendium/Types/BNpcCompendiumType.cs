@@ -30,9 +30,9 @@ public record BNpcZoneInfo(
 
 public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
 {
-    private const string OpenWorldZoneType = "Open World";
-    private const string OtherZoneType = "Other";
-    private const string NotAHuntMark = "Not a Hunt Mark";
+    private const string OpenWorldZoneType = "野外";
+    private const string OtherZoneType = "其他";
+    private const string NotAHuntMark = "非狩猎目标";
 
     private static readonly EquipSlot[] SharedModelSlots =
     [
@@ -76,9 +76,9 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
         _mobsByTerritory = new Lazy<Dictionary<uint, List<uint>>>(BuildMobsByTerritory);
     }
 
-    public override string Singular => "Mob";
-    public override string Plural => "Mobs";
-    public override string Description => "Monsters, where they spawn and what they drop.";
+    public override string Singular => "怪物";
+    public override string Plural => "怪物";
+    public override string Description => "怪物、出现位置及掉落物品。";
     public override string Key => "mobs";
     public override (string?, uint?) Icon => (null, Icons.MobIcon);
 
@@ -142,30 +142,30 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
             new CompendiumGrouping<BNpcNameRow>()
             {
                 Key = "zone_type",
-                Name = "Zone Type",
+                Name = "区域类型",
                 GroupsFunc = row => GetZoneInfo(row).ZoneTypes,
                 GroupMapping = zoneType => (string)zoneType,
             },
             new CompendiumGrouping<BNpcNameRow>()
             {
                 Key = "zone",
-                Name = "Zone",
+                Name = "区域",
                 GroupsFunc = row => GetZoneInfo(row).ZoneNames,
                 GroupMapping = zoneName => (string)zoneName,
                 CurrentGroupFunc = GetCurrentZoneName,
-                CurrentGroupLabel = "Current Zone",
+                CurrentGroupLabel = "当前区域",
             },
             new CompendiumGrouping<BNpcNameRow>()
             {
                 Key = "expansion",
-                Name = "Expansion",
+                Name = "资料片",
                 GroupsFunc = row => GetZoneInfo(row).Expansions,
                 GroupMapping = expansion => (string)expansion,
             },
             new CompendiumGrouping<BNpcNameRow>()
             {
                 Key = "hunt_rank",
-                Name = "Hunt Rank",
+                Name = "狩猎等级",
                 GroupFunc = GetHuntRank,
                 GroupMapping = huntRank => (string)huntRank,
             },
@@ -180,7 +180,7 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
         {
             Key = "icon",
             Name = "##Icon",
-            HelpText = "Open the mob",
+            HelpText = "打开怪物",
             Version = "15.0.14",
             ValueSelector = GetIcon,
             CompendiumType = this,
@@ -189,16 +189,16 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
         builder.AddStringColumn(new()
         {
             Key = "name",
-            Name = "Name",
-            HelpText = "The name of the mob",
+            Name = "名称",
+            HelpText = "怪物名称",
             Version = "15.0.14",
             ValueSelector = GetName,
         });
         builder.AddStringColumn(new()
         {
             Key = "type",
-            Name = "Type",
-            HelpText = "The type of mob",
+            Name = "类型",
+            HelpText = "怪物类型",
             Version = "15.0.14",
             ValueSelector = GetMobTypes,
         });
@@ -208,8 +208,8 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
             builder.AddStringColumn(new()
             {
                 Key = "hunt_rank",
-                Name = "Hunt Rank",
-                HelpText = "The hunt rank of the mob, if it is a hunt mark",
+                Name = "狩猎等级",
+                HelpText = "怪物的狩猎等级（若为狩猎目标）",
                 Version = "15.0.14",
                 ValueSelector = row => GetHuntRank(row) != NotAHuntMark ? GetHuntRank(row) : null,
             });
@@ -218,17 +218,17 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
         builder.AddBooleanColumn(new()
         {
             Key = "is_hunt_mark",
-            Name = "Hunt Mark?",
-            HelpText = "Is the mob a hunt mark?",
+            Name = "是否为狩猎目标",
+            HelpText = "怪物是否为狩猎目标",
             Version = "15.1.1",
             ValueSelector = row => GetHuntRank(row) != NotAHuntMark,
         });
 
         builder.AddStringColumn(new()
         {
-            Key = "zones",
-            Name = "Zones",
-            HelpText = "The zones the mob spawns in",
+            Key = "个区域",
+            Name = "区域",
+            HelpText = "怪物出现的区域",
             Version = "15.0.14",
             ValueSelector = row => string.Join(", ", GetZoneInfo(row).ZoneNames),
         });
@@ -237,8 +237,8 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
         builder.AddMapLinksColumn(new()
         {
             Key = "locations",
-            Name = "Locations",
-            HelpText = "The spawn locations of the mob. Click a flag to print a map link to chat. Right click a flag for more options.",
+            Name = "位置",
+            HelpText = "怪物出现位置。点击旗标可向聊天发送地图链接，右键旗标查看更多选项。",
             Version = "15.1.1",
             ValueSelector = row => groupZoneName == null
                 ? GetMapLinks(row)
@@ -250,8 +250,8 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
             builder.AddStringColumn(new()
             {
                 Key = "zone_type",
-                Name = "Zone Type",
-                HelpText = "The types of zone the mob spawns in, for example open world, dungeon or raid",
+                Name = "区域类型",
+                HelpText = "怪物出现区域的类型，如野外、迷宫或大型任务",
                 Version = "15.0.14",
                 ValueSelector = row => string.Join(", ", GetZoneInfo(row).ZoneTypes),
             });
@@ -260,8 +260,8 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
         builder.AddBooleanColumn(new()
         {
             Key = "open_world",
-            Name = "Open World?",
-            HelpText = "Does the mob spawn in an open world zone?",
+            Name = "是否位于野外",
+            HelpText = "怪物是否出现于野外区域",
             Version = "15.0.14",
             ValueSelector = row => GetZoneInfo(row).IsInOpenWorld,
         });
@@ -271,8 +271,8 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
             builder.AddStringColumn(new()
             {
                 Key = "expansion",
-                Name = "Expansion",
-                HelpText = "The expansions of the zones the mob spawns in",
+                Name = "资料片",
+                HelpText = "怪物出现区域所属的资料片",
                 Version = "15.0.14",
                 ValueSelector = row => string.Join(", ", GetZoneInfo(row).Expansions),
             });
@@ -281,8 +281,8 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
         builder.AddItemsColumn(new()
         {
             Key = "drops",
-            Name = "Drops",
-            HelpText = "The items the mob drops",
+            Name = "掉落",
+            HelpText = "怪物掉落的物品",
             Version = "15.0.14",
             ValueSelector = GetDrops,
         });
@@ -294,47 +294,47 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
 
         foreach (var mobType in row.MobTypes)
         {
-            viewBuilder.AddTag(() => mobType.ToString(), () => "The type of mob");
+            viewBuilder.AddTag(() => mobType.ToString(), () => "怪物类型");
         }
 
         var huntRank = GetHuntRank(row);
         if (huntRank != NotAHuntMark)
         {
-            viewBuilder.AddTag(() => huntRank + " Rank Hunt", () => "The mob is a hunt mark", () => ImGuiColors.DalamudOrange);
+            viewBuilder.AddTag(() => huntRank + " 级狩猎", () => "此怪物为狩猎目标", () => ImGuiColors.DalamudOrange);
         }
 
         var zoneInfo = GetZoneInfo(row);
         if (zoneInfo.IsInOpenWorld)
         {
-            viewBuilder.AddTag(() => OpenWorldZoneType, () => "The mob spawns in an open world zone");
+            viewBuilder.AddTag(() => OpenWorldZoneType, () => "怪物出现于野外区域");
         }
 
         var garlandToolsId = row.GarlandToolsId;
         if (garlandToolsId != null)
         {
-            viewBuilder.AddLink($"https://www.garlandtools.org/db/#mob/{garlandToolsId}", "Open in Garland Tools", "garlandtools");
+            viewBuilder.AddLink($"https://www.garlandtools.org/db/#mob/{garlandToolsId}", "在 Garland Tools 中打开", "garlandtools");
         }
 
-        viewBuilder.AddLink($"https://ffxivteamcraft.com/db/en/mob/{row.RowId}", "Open in Teamcraft", "teamcraft");
+        viewBuilder.AddLink($"https://ffxivteamcraft.com/db/en/mob/{row.RowId}", "在 Teamcraft 中打开", "teamcraft");
 
         viewBuilder.AddItemListSection(new ItemListSectionOptions()
         {
             SectionKey = "drops",
-            SectionName = "Drops",
+            SectionName = "掉落",
             Items = GetDrops(row).Select(c => new ItemInfo(c)).ToList(),
         });
 
         viewBuilder.AddMapLinksSectionSection(new MapLinksViewSectionOptions()
         {
             SectionKey = "spawn_locations",
-            SectionName = "Spawn Locations",
+            SectionName = "出现位置",
             MapLinks = GetMapLinks(row),
         });
 
         viewBuilder.AddCollectionRowRefSection(new CollectionRowRefSectionOptions()
         {
-            SectionKey = "zones",
-            SectionName = "Zones",
+            SectionKey = "个区域",
+            SectionName = "区域",
             RelatedRefs = zoneInfo.Zones.Select(c => c.Base.AsUntypedRowRef()).ToList(),
         });
 
@@ -346,7 +346,7 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
                 viewBuilder.AddItemListSection(new ItemListSectionOptions()
                 {
                     SectionKey = "shared_models_" + slot,
-                    SectionName = "Shared Models - " + slot.Humanize(),
+                    SectionName = "共用模型－ " + slot.Humanize(),
                     Items = firstBase.GetRelatedItems(slot).Select(c => new ItemInfo(c)).ToList(),
                 });
             }
@@ -430,7 +430,7 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
             }
 
             var location = new GenericMapLocation(spawn.Position.X, spawn.Position.Y, territoryType.Base.Map, territoryType.Base.PlaceName, territoryType.RowRef);
-            var zoneName = territoryType.Base.PlaceName.ValueNullable?.Name.ToImGuiString() ?? "Unknown";
+            var zoneName = territoryType.Base.PlaceName.ValueNullable?.Name.ToImGuiString() ?? "未知";
             mapLinks.Add(new MapLinkEntry(Icons.FlagIcon, zoneName, $"X: {spawn.Position.X:0.0} Y: {spawn.Position.Y:0.0}", location, mobName));
         }
 
@@ -473,9 +473,9 @@ public class BNpcCompendiumType : CompendiumType<BNpcNameRow>
             var zoneTypes = zones.Select(GetZoneTypeName).Distinct().OrderBy(c => c).ToList();
             zoneInfo[spawns.Key] = new BNpcZoneInfo(
                 zones,
-                zones.Select(c => c.Base.PlaceName.ValueNullable?.Name.ToImGuiString() ?? "Unknown").Distinct().OrderBy(c => c).ToList(),
+                zones.Select(c => c.Base.PlaceName.ValueNullable?.Name.ToImGuiString() ?? "未知").Distinct().OrderBy(c => c).ToList(),
                 zoneTypes,
-                zones.Select(c => c.Base.ExVersion.ValueNullable?.Name.ToImGuiString() ?? "Unknown").Distinct().ToList(),
+                zones.Select(c => c.Base.ExVersion.ValueNullable?.Name.ToImGuiString() ?? "未知").Distinct().ToList(),
                 zoneTypes.Contains(OpenWorldZoneType));
         }
 

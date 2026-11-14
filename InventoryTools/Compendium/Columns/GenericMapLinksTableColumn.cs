@@ -94,7 +94,7 @@ public class GenericMapLinksTableColumn<TData> : StringColumn<WindowState, TData
         var rowHeight = _rowHeightSetting.CurrentValue(_configuration);
         var iconSize = new Vector2(rowHeight) * ImGui.GetIO().FontGlobalScale;
         var index = 0;
-        _imGuiService.WrapTableColumnElements("MapLinks" + Key + rowIndex, entries,
+        _imGuiService.WrapTableColumnElements("地图链接" + Key + rowIndex, entries,
             rowHeight * ImGui.GetIO().FontGlobalScale - ImGui.GetStyle().FramePadding.X,
             entry =>
             {

@@ -15,8 +15,8 @@ public class FiltersFeature : Feature
 
     public override PageLayout Build()
     {
-        return Page("feature/sample-lists", "Sample Lists",
-            Paragraph("These lists show you what the plugin can do. If you select them, they'll be installed once you complete the wizard."),
+        return Page("feature/sample-lists", "示例列表",
+            Paragraph("这些示例展示插件的功能，选中后将在完成向导时安装。"),
             Setting<SampleFilter100GillOrLess>("Items worth 100 gil or less"),
             Setting<SampleFilterDuplicateItems>("Duplicate items in your inventory"),
             Setting<SampleFilterMaterialCleanup>("Crafting materials to move to storage")

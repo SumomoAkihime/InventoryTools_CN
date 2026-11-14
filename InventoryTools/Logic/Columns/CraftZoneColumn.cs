@@ -21,13 +21,15 @@ public class CraftZoneColumn : TextColumn
         _mapSheet = mapSheet;
     }
 
-    public override string Name { get; set; } = "Zone";
+    public override string Name { get; set; } = "区域";
+    [Newtonsoft.Json.JsonIgnore]
+    public override string ExportName => "Zone";
     public override float Width { get; set; } = 100;
 
     public override bool? CraftOnly { get; } = true;
 
     public override string HelpText { get; set; } =
-        "The zone in which this item should be gathered from. This is only relevant to craft lists.";
+        "物品应前往采集的区域，仅与制作清单有关。";
 
     public override ColumnCategory ColumnCategory { get; } = ColumnCategory.Crafting;
     public override string? CurrentValue(ColumnConfiguration columnConfiguration, SearchResult searchResult)

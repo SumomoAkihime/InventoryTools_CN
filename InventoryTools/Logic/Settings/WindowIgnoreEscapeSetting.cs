@@ -19,9 +19,9 @@ public class WindowIgnoreEscapeSetting<T> : BooleanSetting where T : Window
     public WindowIgnoreEscapeSetting(ILogger logger,MediatorService mediatorService, ImGuiService imGuiService, T window) : base(logger, imGuiService)
     {
         _mediatorService = mediatorService;
-        _key = window.Key + "Escape";
-        _window = window.GenericName + " Window";
-        _helpText = "Should the escape key be ignored for the " + window.GenericName + " window?";
+        _key = window.Key + "Esc";
+        _window = window.GenericName + " 窗口";
+        _helpText = "是否忽略 Esc 键，窗口为 " + window.GenericName + " window?";
     }
     public override bool DefaultValue { get; set; } = false;
     public override bool CurrentValue(InventoryToolsConfiguration configuration)

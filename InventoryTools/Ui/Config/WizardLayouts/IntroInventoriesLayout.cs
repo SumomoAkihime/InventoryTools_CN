@@ -6,16 +6,16 @@ public class IntroInventoriesLayout : ContentLayout
 {
     public override PageLayout Build()
     {
-        return Page("intro/inventories", "Your items",
-            Paragraph("The plugin can only see an inventory after the game has shown it to you at least once. That is a limit of how the game sends its data, not a setting you can turn on."),
-            Section("If something is missing",
-                Paragraph("Open it in game once and it will be remembered from then on. Most commonly:"),
-                Bullet("Retainers: talk to a summoning bell and open each retainer's inventory."),
-                Bullet("Free company chest: open every tab you care about."),
-                Bullet("Glamour chest and armoire."),
-                Bullet("Chocobo saddlebag.")),
-            Section("After that",
-                Paragraph("The plugin keeps its own copy, so you can search your retainers' contents from anywhere without going back to a bell."))
+        return Page("intro/inventories", "你的物品",
+            Paragraph("游戏至少显示过一次的库存才能被插件记录，这是游戏发送数据的方式决定的。"),
+            Section("如果内容缺失",
+                Paragraph("在游戏中打开一次后即可记录。常见操作如下。"),
+                Bullet("雇员·使用传唤铃并打开每位雇员的库存。"),
+                Bullet("部队仓库·打开需要记录的各个标签页。"),
+                Bullet("投影台和收藏柜。"),
+                Bullet("陆行鸟鞍囊。")),
+            Section("随后",
+                Paragraph("插件保留库存副本，方便随时搜索雇员物品。"))
         );
     }
 }

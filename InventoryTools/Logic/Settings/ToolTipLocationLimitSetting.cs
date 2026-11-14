@@ -18,8 +18,8 @@ public class ToolTipLocationLimitSetting : IntegerSetting
     }
 
     public override string Key { get; set; } = "TooltipLocationLimit";
-    public override string Name { get; set; } = "Add Item Locations (Max Results)";
-    public override string HelpText { get; set; } = "The maximum amount of locations to list on the tooltip. This requires 'Display Amount Owned?' to be enabled.";
+    public override string Name { get; set; } = "添加物品位置（结果上限）";
+    public override string HelpText { get; set; } = "物品提示中最多列出的位置数量，需要启用持有数量显示。";
     public override string Version => "1.7.0.0";
 
     public ToolTipLocationLimitSetting(ILogger<ToolTipLocationLimitSetting> logger, ImGuiService imGuiService) : base(logger, imGuiService)

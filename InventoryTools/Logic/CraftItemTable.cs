@@ -87,10 +87,10 @@ namespace InventoryTools.Logic
                         var groupedCrafts = CraftGroups;
                         if (groupedCrafts.Count == 0)
                         {
-                            using var tabItem = ImRaii.TabItem("No Items");
+                            using var tabItem = ImRaii.TabItem("无物品");
                             if (!tabItem.Success) return messages;
                             ImGui.TextWrapped(
-                                "No items have been added to the list. Add items via the search menu button at the top right of the screen or by right clicking on an item anywhere within the plugin.");
+                                "尚未添加物品。可通过右上角搜索菜单或插件内物品右键菜单添加。");
                         }
                         else
                         {
@@ -215,7 +215,7 @@ namespace InventoryTools.Logic
                                     if (columnIndex == 1)
                                     {
                                         ImGui.TextWrapped(
-                                            "No items have been added to the list. Add items via the search menu button at the top right of the screen or by right clicking on an item anywhere within the plugin.");
+                                            "尚未添加物品。可通过右上角搜索菜单或插件内物品右键菜单添加。");
                                     }
                                 }
                             }
@@ -302,7 +302,7 @@ namespace InventoryTools.Logic
             {
                 foreach (var column in Columns)
                 {
-                    csv.WriteField(column.ExportName ?? column.Column.Name);
+                    csv.WriteField(column.ExportName ?? column.Column.ExportName);
                 }
                 csv.NextRecord();
                 if (FilterConfiguration.FilterType == FilterType.CraftFilter)
@@ -336,7 +336,7 @@ namespace InventoryTools.Logic
                     newLine["Id"] = item.Item.RowId;
                     foreach (var column in Columns)
                     {
-                        newLine[column.Column.Name] = column.Column.JsonExport(column, item) ?? "";
+                        newLine[column.Column.ExportName] = column.Column.JsonExport(column, item) ?? "";
                     }
                     lines.Add(newLine);
                 }

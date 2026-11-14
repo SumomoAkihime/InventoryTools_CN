@@ -7,24 +7,24 @@ public class HotkeysLayout : ConfigLayout
 {
     public override PageLayout Build()
     {
-        return Page("hotkeys", "Hotkeys",
-            Section("Toggle a window",
-                Paragraph("Work anywhere, whether or not you are hovering something."),
-                Setting<HotKeyListsWindowSetting>("Lists"),
-                Setting<HotkeyCraftWindowSetting>("Crafts"),
-                Setting<HotkeyConfigWindowSetting>("Configuration"),
-                Setting<HotkeyMobWindowSetting>("Mobs"),
-                Setting<HotkeyDutiesWindowSetting>("Duties"),
-                Setting<HotkeyAirshipWindowSetting>("Airships"),
-                Setting<HotkeySubmarinesWindowSetting>("Submarines"),
-                Setting<HotkeyRetainerTasksWindowSetting>("Retainer ventures")),
-            Section("While hovering an item",
-                Paragraph("These act on whatever item is under the cursor, so they only do anything while an item is hovered."),
-                Setting<HotkeyMoreInfoSetting>("More information"),
-                Setting<HotkeyOpenItemLogSetting>("Whichever log applies"),
-                Setting<HotkeyOpenCraftingLogSetting>("Crafting log"),
-                Setting<HotkeyOpenGatheringLogSetting>("Gathering log"),
-                Setting<HotkeyOpenFishingLogSetting>("Fishing log"))
+        return Page("hotkeys", "快捷键",
+            Section("切换窗口",
+                Paragraph("可在任意位置使用。"),
+                Setting<HotKeyListsWindowSetting>("列表"),
+                Setting<HotkeyCraftWindowSetting>("制作"),
+                Setting<HotkeyConfigWindowSetting>("设置"),
+                Setting<HotkeyMobWindowSetting>("怪物"),
+                Setting<HotkeyDutiesWindowSetting>("任务副本"),
+                Setting<HotkeyAirshipWindowSetting>("飞空艇"),
+                Setting<HotkeySubmarinesWindowSetting>("潜水艇"),
+                Setting<HotkeyRetainerTasksWindowSetting>("雇员探险")),
+            Section("鼠标悬停物品时",
+                Paragraph("这些操作作用于光标下的物品，需要先悬停物品。"),
+                Setting<HotkeyMoreInfoSetting>("更多信息"),
+                Setting<HotkeyOpenItemLogSetting>("适用的游戏笔记"),
+                Setting<HotkeyOpenCraftingLogSetting>("制作笔记"),
+                Setting<HotkeyOpenGatheringLogSetting>("采集笔记"),
+                Setting<HotkeyOpenFishingLogSetting>("钓鱼笔记"))
         );
     }
 }

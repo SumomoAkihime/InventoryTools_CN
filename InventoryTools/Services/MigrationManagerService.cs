@@ -270,11 +270,11 @@ public class MigrationManagerService : IHostedService
         if (config.InternalVersion == 15)
         {
             _logger.LogInformation("Migrating to version 16");
-            var hasExistingHistoryList = config.HasList("History");
+            var hasExistingHistoryList = config.HasList("历史记录");
             if (!hasExistingHistoryList && !config.FirstRun)
             {
                 var historyFilter = _filterConfigFactory.Invoke();
-                historyFilter.Name = "History";
+                historyFilter.Name = "历史记录";
                 historyFilter.FilterType = FilterType.HistoryFilter;
                 historyFilter.DisplayInTabs = true;
                 historyFilter.SourceAllCharacters = true;

@@ -20,9 +20,9 @@ public class ItemBeastmasterFamiliarUseRenderer : ItemInfoRenderer<ItemBeastmast
 
     public override RendererType RendererType => RendererType.Use;
     public override ItemInfoType Type => ItemInfoType.BeastmasterFamiliar;
-    public override string SingularName => "Beastmaster Familiar";
-    public override string PluralName => "Beastmaster Familiars";
-    public override string HelpText => "Does this item unlock a beastmaster familiar?";
+    public override string SingularName => "驯兽师使魔";
+    public override string PluralName => "驯兽师使魔";
+    public override string HelpText => "物品是否用于解锁驯兽师使魔";
     public override bool ShouldGroup => false;
 
     public override Func<ItemSource, (Type, uint)>? RelatedType => source =>
@@ -52,12 +52,12 @@ public class ItemBeastmasterFamiliarUseRenderer : ItemInfoRenderer<ItemBeastmast
     public override Func<ItemSource, string> GetDescription => source =>
     {
         var asSource = AsSource(source);
-        return "Unlocks the " + GetFamiliarName(asSource) + " familiar for beastmasters";
+        return "解锁 " + GetFamiliarName(asSource) + " 驯兽师使魔";
     };
 
     private string GetFamiliarName(ItemBeastmasterFamiliarUse source)
     {
         var name = source.Pet.ValueNullable?.Name.ExtractText();
-        return string.IsNullOrEmpty(name) ? "Unknown" : name.FirstCharToUpper();
+        return string.IsNullOrEmpty(name) ? "未知" : name.FirstCharToUpper();
     }
 }

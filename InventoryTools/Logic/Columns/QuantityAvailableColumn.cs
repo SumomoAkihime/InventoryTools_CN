@@ -47,12 +47,14 @@ namespace InventoryTools.Logic.Columns
             }
             return qty;
         }
-        public override string Name { get; set; } = "Total Quantity Available";
-        public override string RenderName => "Available";
+        public override string Name { get; set; } = "可用总数量";
+        [Newtonsoft.Json.JsonIgnore]
+        public override string ExportName => "Total Quantity Available";
+        public override string RenderName => "可用";
         public override float Width { get; set; } = 100;
 
         public override string HelpText { get; set; } =
-            "The number of items available across all inventories of this item.";
+            "全部库存中此物品的可用数量。";
         public override bool HasFilter { get; set; } = true;
         public override ColumnFilterType FilterType { get; set; } = ColumnFilterType.Text;
 

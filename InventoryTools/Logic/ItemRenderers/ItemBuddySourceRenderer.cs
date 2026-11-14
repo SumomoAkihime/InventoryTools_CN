@@ -19,9 +19,9 @@ public class ItemBuddySourceRenderer : ItemInfoRenderer<ItemBuddySource>
 
     public override RendererType RendererType => RendererType.Use;
     public override ItemInfoType Type => ItemInfoType.BuddyItem;
-    public override string SingularName => "Used on Chocobo Companion";
+    public override string SingularName => "用于搭档陆行鸟";
     public override bool ShouldGroup => false;
-    public override string HelpText => "Can the item be used on your chocobo companion?";
+    public override string HelpText => "物品是否可用于搭档陆行鸟";
 
     public override Action<ItemSource> DrawTooltip => source =>
     {
@@ -32,17 +32,17 @@ public class ItemBuddySourceRenderer : ItemInfoRenderer<ItemBuddySource>
 
         if (usedField)
         {
-            ImGui.Text("Battle: Increases EXP earned by your chocobo companion.");
+            ImGui.Text("战斗·增加搭档陆行鸟获得的经验值。");
         }
 
         if (usedTraining)
         {
-            ImGui.Text("Stable: Training food for a stabled Chocobo companion.");
+            ImGui.Text("鸟厩·用于训练寄养的搭档陆行鸟。");
         }
 
         if (usedDyeing)
         {
-            ImGui.Text("Dying: Used in Chocobo Dyeing.");
+            ImGui.Text("染色·用于陆行鸟染色。");
         }
     };
     public override Func<ItemSource, string> GetName => source =>
@@ -97,6 +97,6 @@ public class ItemBuddySourceRenderer : ItemInfoRenderer<ItemBuddySource>
             name.Add("dyeing");
         }
 
-        return "Used for " + string.Join(", ", name);
+        return "用于 " + string.Join(", ", name);
     };
 }

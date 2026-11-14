@@ -11,6 +11,7 @@ namespace InventoryTools.Logic.Columns
     public interface IColumn : IDisposable
     {
         public string Name { get; set; }
+        public string ExportName => Name;
         public float Width { get; set; }
         public string HelpText { get; set; }
         public List<string>? FilterChoices { get; set; }

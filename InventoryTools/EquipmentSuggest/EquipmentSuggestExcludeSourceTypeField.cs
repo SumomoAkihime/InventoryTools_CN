@@ -23,8 +23,8 @@ public sealed class EquipmentSuggestExcludeSourceTypeField : MultipleChoiceFormF
         ItemInfoType.CashShop,
     };
     public override string Key { get; set; } = "ExcludeSourceType";
-    public override string Name { get; set; } = "Exclude Sources";
-    public override string HelpText { get; set; } = "When recommending an item, what sources should be excluded?";
+    public override string Name { get; set; } = "排除来源";
+    public override string HelpText { get; set; } = "装备推荐排除的来源";
     public override string Version { get; set; } = "1.12.0.10";
 
     public override Dictionary<ItemInfoType, string> GetChoices(EquipmentSuggestConfig configuration)

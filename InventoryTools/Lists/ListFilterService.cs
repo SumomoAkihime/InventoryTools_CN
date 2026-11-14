@@ -84,7 +84,7 @@ public class ListFilterService : DisposableMediatorBackgroundService
         _useActiveWorldSetting = useActiveWorldSetting;
         _useHomeWorldSetting = useHomeWorldSetting;
         _useDefaultWorldsSetting = useDefaultWorldsSetting;
-        FilterQueue = taskQueueFactory.Invoke("List Filter Queue", 1);
+        FilterQueue = taskQueueFactory.Invoke("列表筛选队列", 1);
         MediatorService.Subscribe<RequestListUpdateMessage>(this, message => RequestRefresh(message.FilterConfiguration));
     }
 
